@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kittery Point Yacht Club</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+      max-width: 560px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #0d3b6e 0%, #1a5fa8 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .anchor-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .card-header h1 {
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-header .est {
+      font-size: 0.85rem;
+      opacity: 0.65;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 2rem 2rem 2.25rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #fff8e1;
+      color: #7a5a00;
+      border: 1px solid #f0d060;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .status-badge::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #e6a800;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0d3b6e;
+      margin-bottom: 0.6rem;
+    }
+
+    p {
+      font-size: 0.97rem;
+      color: #444;
+      margin-bottom: 1.25rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e8edf5;
+      margin: 1.5rem 0;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-list .label {
+      font-weight: 600;
+      color: #0d3b6e;
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+
+    .contact-list a {
+      color: #1a5fa8;
+      text-decoration: none;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #aaa;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <span class="anchor-icon">⚓</span>
+      <h1>Kittery Point Yacht Club</h1>
+      <div class="est">Kittery Point, Maine</div>
+    </div>
+    <div class="card-body">
+      <div class="status-badge">Site maintenance in progress</div>
+
+      <h2>We'll be back shortly</h2>
+      <p>
+        Our website is currently undergoing maintenance. We apologize for the
+        inconvenience and expect to be back online soon.
+      </p>
+      <p>
+        In the meantime, please reach out to us directly — we're happy to help
+        with membership questions, event information, or anything else.
+      </p>
+
+      <hr class="divider" />
+
+      <h2>Contact Us</h2>
+      <ul class="contact-list">
+        <li>
+          <span class="label">General</span>
+          <a href="mailto:info@kpyc.org">info@kpyc.org</a>
+        </li>
+        <li>
+          <span class="label">Secretary</span>
+          <a href="mailto:secretary@kpyc.org">secretary@kpyc.org</a>
+        </li>
+        <li>
+          <span class="label">Phone</span>
+          <span>(207) 555-0100</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Kittery Point Yacht Club &nbsp;&middot;&nbsp; kpyc.org
+  </footer>
+</body>
+</html>
