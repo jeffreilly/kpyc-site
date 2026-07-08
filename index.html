@@ -93,22 +93,35 @@
       border-bottom: none;
     }
 
-    .launch-rules {
-      list-style: none;
+    .rules-box {
       margin-top: 0.75rem;
       margin-bottom: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .launch-rules li {
-      font-size: 0.9rem;
-      color: #7a1f1f;
       background: #fdf1f1;
       border: 1px solid #f3d4d4;
-      border-radius: 8px;
-      padding: 0.55rem 0.85rem;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+    }
+
+    .rules-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #7a1f1f;
+      margin-bottom: 0.45rem;
+    }
+
+    .rules-list {
+      list-style: disc;
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .rules-list li {
+      font-size: 0.9rem;
+      color: #7a1f1f;
     }
 
     .card-header {
@@ -455,10 +468,14 @@
       <p style="margin-top: 1.25rem;">
         The launch monitors <strong>VHF Channel 69</strong> during operating hours.
       </p>
-      <ul class="launch-rules">
-        <li>Maximum capacity: <strong>6 passengers</strong></li>
-        <li>No open containers permitted, strictly enforced</li>
-      </ul>
+      <div class="rules-box">
+        <div class="rules-label">Strictly Enforced</div>
+        <ul class="rules-list">
+          <li>Maximum capacity: 6 passengers</li>
+          <li>No open containers permitted</li>
+          <li>New Hampshire law: children 12 and under must wear a life jacket at all times</li>
+        </ul>
+      </div>
     </div>
   </div>
 
