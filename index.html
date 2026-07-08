@@ -24,9 +24,13 @@
       background: #fff;
       border-radius: 14px;
       box-shadow: 0 4px 24px rgba(0,0,0,.10);
-      max-width: 560px;
+      max-width: 720px;
       width: 100%;
       overflow: hidden;
+    }
+
+    .card + .card {
+      margin-top: 1.5rem;
     }
 
     .card-header {
@@ -102,6 +106,70 @@
       color: #aaa;
       margin-top: 2rem;
     }
+
+    .contacts-card .card-header {
+      padding: 1.75rem 2rem 1.5rem;
+    }
+
+    .contacts-card h2 {
+      margin-top: 1.5rem;
+    }
+
+    .contacts-card h2:first-child {
+      margin-top: 0;
+    }
+
+    .contact-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact {
+      padding: 0.85rem 1rem;
+      background: #f8f9fb;
+      border: 1px solid #eceff3;
+      border-radius: 10px;
+    }
+
+    .contact-name {
+      font-weight: 700;
+      color: #1a1a2e;
+      font-size: 0.98rem;
+    }
+
+    .contact-role {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1a5fa8;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-top: 0.15rem;
+    }
+
+    .contact-desc {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.35rem;
+      margin-bottom: 0;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.87rem;
+    }
+
+    .contact-info a {
+      color: #0d3b6e;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -117,13 +185,155 @@
       <h2>Our website is temporarily unavailable</h2>
       <p>
         The KPYC website is currently offline due to a service disruption beyond
-        our control. This is not a routine outage — we are working to either
-        restore the existing site or launch a replacement, and do not have an
+        our control. This is not a routine outage. We are working to either
+        restore the existing site or launch a replacement, but do not have an
         estimated timeline at this time.
       </p>
       <p>
         We appreciate your patience and look forward to seeing you on the water.
       </p>
+    </div>
+  </div>
+
+  <div class="card contacts-card">
+    <div class="card-header">
+      <h1>Club Leadership &amp; Contacts</h1>
+    </div>
+    <div class="card-body">
+      <h2>Flag Officers</h2>
+      <div class="contact-group">
+        <div class="contact">
+          <div class="contact-name">Chris Olsen</div>
+          <div class="contact-role">Commodore &middot; Director</div>
+          <p class="contact-desc">Presides over board meetings and central point for outside contact</p>
+          <div class="contact-info">
+            <a href="mailto:chris@syrupbythesea.com">chris@syrupbythesea.com</a>
+            <a href="tel:+16039886174">603-988-6174</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Kevin McCoole</div>
+          <div class="contact-role">Vice Commodore &middot; Director &middot; Sailing School</div>
+          <p class="contact-desc">Sailing School and launch drivers</p>
+          <div class="contact-info">
+            <a href="mailto:kevinmccoole@rocketmail.com">kevinmccoole@rocketmail.com</a>
+            <a href="tel:+12077034691">207-703-4691</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Sally Elshout</div>
+          <div class="contact-role">Rear Commodore &middot; Director</div>
+          <p class="contact-desc">Sailing Races and Regattas</p>
+          <div class="contact-info">
+            <a href="mailto:sallyelshout@yahoo.com">sallyelshout@yahoo.com</a>
+            <a href="tel:+16034986456">603-498-6456</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Michael Millikan</div>
+          <div class="contact-role">Treasurer &middot; Director</div>
+          <p class="contact-desc">Club finances, dinghy and rack storage stickers</p>
+          <div class="contact-info">
+            <a href="mailto:michael.millikan@icloud.com">michael.millikan@icloud.com</a>
+            <a href="tel:+16092739388">609-273-9388</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Lauren Barbour</div>
+          <div class="contact-role">Secretary</div>
+          <p class="contact-desc">Maintains Board Meeting Minutes</p>
+          <div class="contact-info">
+            <a href="mailto:lpbarbour@gmail.com">lpbarbour@gmail.com</a>
+            <a href="tel:+19786041224">978-604-1224</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Adam Shapiro</div>
+          <div class="contact-role">Fleet Captain</div>
+          <p class="contact-desc">Club education events for members</p>
+          <div class="contact-info">
+            <a href="mailto:adamhshapiro@gmail.com">adamhshapiro@gmail.com</a>
+            <a href="tel:+12039091776">203-909-1776</a>
+          </div>
+        </div>
+      </div>
+
+      <h2>Board of Directors</h2>
+      <div class="contact-group">
+        <div class="contact">
+          <div class="contact-name">Brendan Cooney</div>
+          <div class="contact-role">Director</div>
+          <div class="contact-info">
+            <a href="mailto:br_cooney@mac.com">br_cooney@mac.com</a>
+            <a href="tel:+16036828908">603-682-8908</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Doug Pinciaro</div>
+          <div class="contact-role">Director &middot; Dockmaster</div>
+          <p class="contact-desc">Docks and moorings</p>
+          <div class="contact-info">
+            <a href="mailto:dpinciaro@comcast.net">dpinciaro@comcast.net</a>
+            <a href="tel:+16034752828">603-475-2828</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Jeffrey &amp; Rebecca Reilly</div>
+          <div class="contact-role">Director &middot; Webmaster</div>
+          <p class="contact-desc">Club website</p>
+          <div class="contact-info">
+            <a href="mailto:jeffreilly@outlook.com">jeffreilly@outlook.com</a>
+            <a href="tel:+16039788464">603-978-8464</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">David Severance</div>
+          <div class="contact-role">Director</div>
+          <div class="contact-info">
+            <a href="mailto:dseverance@gmail.com">dseverance@gmail.com</a>
+            <a href="tel:+16038013401">603-801-3401</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Robert Sullivan</div>
+          <div class="contact-role">Director</div>
+          <div class="contact-info">
+            <a href="mailto:rpsullivan@cityofportsmouth.com">rpsullivan@cityofportsmouth.com</a>
+            <a href="tel:+16036107204">603-610-7204</a>
+          </div>
+        </div>
+      </div>
+
+      <h2>Committees</h2>
+      <div class="contact-group">
+        <div class="contact">
+          <div class="contact-name">Lynn McCarthy &amp; Dylan Kimmel</div>
+          <div class="contact-role">House</div>
+          <p class="contact-desc">Land based building and grounds, includes dinghy and paddle racks</p>
+          <div class="contact-info">
+            <a href="mailto:dkimmel@neintegration.com">dkimmel@neintegration.com</a>
+            <a href="tel:+16039696742">603-969-6742</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Christopher &amp; Melissa Snow</div>
+          <div class="contact-role">Membership</div>
+          <p class="contact-desc">Membership applications for board consideration and new member onboarding</p>
+          <div class="contact-info">
+            <a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>
+            <a href="tel:+16037313348">603-731-3348</a>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="contact-name">Alison Magill</div>
+          <div class="contact-role">Social</div>
+          <p class="contact-desc">Club social calendar and events</p>
+          <div class="contact-info">
+            <a href="mailto:alimagill@gmail.com">alimagill@gmail.com</a>
+            <a href="tel:+16039889037">603-988-9037</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
