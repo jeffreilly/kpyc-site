@@ -7,6 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: #f4f6f9;
@@ -31,6 +35,56 @@
 
     .card + .card {
       margin-top: 1.5rem;
+    }
+
+    .card[id] {
+      scroll-margin-top: 1.5rem;
+    }
+
+    .toc-card .card-body {
+      padding: 1.25rem 2rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.25rem;
+    }
+
+    .toc-list a {
+      color: #0d3b6e;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+
+    .toc-list a:hover {
+      text-decoration: underline;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table th,
+    .hours-table td {
+      text-align: left;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.92rem;
+      border-bottom: 1px solid #eceff3;
+    }
+
+    .hours-table th {
+      color: #0d3b6e;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .hours-table tr:last-child td {
+      border-bottom: none;
     }
 
     .card-header {
@@ -173,7 +227,17 @@
   </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card toc-card">
+    <div class="card-body">
+      <ul class="toc-list">
+        <li><a href="#notice">Notice</a></li>
+        <li><a href="#contacts">Contacts</a></li>
+        <li><a href="#hours">Launch Hours</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" id="notice">
     <div class="card-header">
       <span class="anchor-icon">⚓</span>
       <h1>Kittery Point Yacht Club</h1>
@@ -195,7 +259,7 @@
     </div>
   </div>
 
-  <div class="card contacts-card">
+  <div class="card contacts-card" id="contacts">
     <div class="card-header">
       <h1>Club Leadership &amp; Contacts</h1>
     </div>
@@ -334,6 +398,36 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="card" id="hours">
+    <div class="card-header">
+      <h1>Launch Hours</h1>
+    </div>
+    <div class="card-body">
+      <table class="hours-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tuesday &amp; Thursday</td>
+            <td>2:00 PM &ndash; 9:00 PM</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>11:00 AM &ndash; 8:00 PM</td>
+          </tr>
+          <tr>
+            <td>Saturday &amp; Sunday</td>
+            <td>9:00 AM &ndash; 8:00 PM</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
