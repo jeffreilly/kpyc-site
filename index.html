@@ -93,6 +93,24 @@
       border-bottom: none;
     }
 
+    .launch-rules {
+      list-style: none;
+      margin-top: 0.75rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .launch-rules li {
+      font-size: 0.9rem;
+      color: #7a1f1f;
+      background: #fdf1f1;
+      border: 1px solid #f3d4d4;
+      border-radius: 8px;
+      padding: 0.55rem 0.85rem;
+    }
+
     .card-header {
       background: linear-gradient(135deg, #0d3b6e 0%, #1a5fa8 100%);
       color: #fff;
@@ -434,9 +452,13 @@
           </tr>
         </tbody>
       </table>
-      <p style="margin-top: 1.25rem; margin-bottom: 0;">
+      <p style="margin-top: 1.25rem;">
         The launch monitors <strong>VHF Channel 69</strong> during operating hours.
       </p>
+      <ul class="launch-rules">
+        <li>Maximum capacity: <strong>6 passengers</strong></li>
+        <li>No open containers permitted &mdash; strictly enforced</li>
+      </ul>
     </div>
   </div>
 
