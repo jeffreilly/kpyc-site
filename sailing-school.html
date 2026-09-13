@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KPYC Sailing School | Kittery Point Yacht Club</title>
+  <link rel="icon" href="assets/favicon.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 1.25rem 2rem; }
+    .nav { position: sticky; top: 0; z-index: 30; width: 100%; background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding: 0.55rem 0; }
+    .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; margin-right: 0.5rem; white-space: nowrap; }
+    .nav-brand img { height: 22px; width: auto; }
+    .nav-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.2rem; }
+    .nav-links a { color: #dbe6f5; font-size: 0.84rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.55rem; border-radius: 6px; display: inline-block; }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .nav-links a.active { background: #fff; color: #0d3b6e; }
+    .card { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.10); max-width: 860px; width: 100%; overflow: hidden; }
+    .card + .card { margin-top: 1.5rem; }
+    .card[id] { scroll-margin-top: 5rem; }
+    .card-header { background: linear-gradient(135deg, #0d3b6e 0%, #1a5fa8 100%); color: #fff; padding: 2rem 2rem 1.6rem; text-align: center; }
+    .card-header h1 { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
+    .card-header .est { font-size: 0.85rem; opacity: 0.7; letter-spacing: 0.04em; }
+    .card-header img.burgee { height: 54px; width: auto; margin-bottom: 0.6rem; }
+    .card-body { padding: 1.75rem 2rem 2rem; }
+    h2 { font-size: 1.15rem; font-weight: 700; color: #0d3b6e; margin: 1.4rem 0 0.5rem; }
+    h2:first-child { margin-top: 0; }
+    h3 { font-size: 0.98rem; font-weight: 700; color: #1a5fa8; margin: 1rem 0 0.35rem; }
+    p { font-size: 0.97rem; color: #444; margin-bottom: 0.9rem; }
+    ul, ol { margin: 0.2rem 0 0.9rem 1.4rem; color: #444; font-size: 0.95rem; }
+    li { margin-bottom: 0.3rem; }
+    a { color: #0d3b6e; }
+    table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 1rem; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #eceff3; vertical-align: top; }
+    th { color: #0d3b6e; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:last-child td { border-bottom: none; }
+    .rules-box { margin: 0.75rem 0 1.25rem; background: #fdf1f1; border: 1px solid #f3d4d4; border-radius: 10px; padding: 0.85rem 1rem; }
+    .rules-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #7a1f1f; margin-bottom: 0.45rem; }
+    .rules-box ul, .rules-box ol { margin-bottom: 0; color: #7a1f1f; }
+    .note { background: #fff8e1; border: 1px solid #f0d060; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.88rem; color: #6b5200; margin: 0.6rem 0 1.1rem; }
+    .info { background: #eef4fb; border: 1px solid #cfdff2; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.9rem; color: #1e3a5f; margin: 0.6rem 0 1.1rem; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 0.6rem; }
+    .tile { display: block; background: #f8f9fb; border: 1px solid #eceff3; border-radius: 10px; padding: 0.9rem 1rem; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
+    .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
+    .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
+    .btn { display: inline-block; background: #0d3b6e; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 8px; margin: 0.2rem 0.4rem 0.6rem 0; }
+    .btn.secondary { background: #e9eef6; color: #0d3b6e; }
+    .btn:hover { opacity: 0.92; }
+    .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 1rem; }
+    .photos img { width: 100%; height: auto; border-radius: 8px; border: 1px solid #e3e6ea; }
+    .photos .cap { font-size: 0.78rem; color: #777; margin-top: 0.2rem; }
+    .toc { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin: 0 0 1rem; }
+    .toc a { font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+    footer { text-align: center; font-size: 0.78rem; color: #aaa; margin-top: 2rem; }
+    @media (max-width: 600px) { .card-body { padding: 1.25rem 1.1rem 1.5rem; } .nav-links a { font-size: 0.8rem; padding: 0.25rem 0.45rem; } }
+</style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="membership.html">Membership</a></li><li><a href="new-members.html">New Members</a></li><li><a href="launch.html">Launch</a></li><li><a href="clubhouse.html">Clubhouse</a></li><li><a href="docks-moorings.html">Docks &amp; Moorings</a></li><li><a href="sailing-school.html" class="active">Sailing School</a></li><li><a href="social-education.html">Social &amp; Education</a></li><li><a href="documents.html">Documents</a></li></ul></div></nav>
+  <div class="card">
+    <div class="card-header">
+      <img class="burgee" src="assets/KPYC_burgee_wave.png" alt="KPYC burgee">
+      <h1>KPYC Sailing School</h1>
+      <div class="est">Teaching sailing on the Seacoast for over 30 years</div>
+    </div>
+    <div class="card-body">
+      <ul class="toc"><li><a href="#programs">Programs</a></li><li><a href="#know">Need to know</a></li><li><a href="#scholarship">Scholarship</a></li></ul>
+      
+<div class="photos">
+  <div><img src="assets/school_photo_2_optis.jpg" alt="Optimists racing"></div>
+  <div><img src="assets/school_photo_3_fleet.jpg" alt="Sailing school fleet"></div>
+</div>
+<p>The Kittery Point Yacht Club Sailing School has been teaching students the art and science of sailing for over 30 years. It is the Seacoast's only public sailing school and youth racing program, taught by US Sailing certified instructors on the quiet waters of the Back Channel. No matter your experience level, you will leave the school with a better understanding of sailing.</p>
+<div class="info">Enrollment for the 2027 season, session dates and fees will be announced here and by email. For information contact the Sailing School Director, Kevin McCoole (<a href="mailto:kevinmccoole@rocketmail.com">kevinmccoole@rocketmail.com</a>, 207-703-4691).</div>
+
+<h2 id="programs">Programs</h2>
+<p>All programs run Monday through Thursday for two weeks; Fridays are reserved for make-up days lost to weather. Minimum age is 8. Parents are welcome at the orientation meeting during the first half hour of the first day of each session. Classes are held as scheduled regardless of weather and holidays unless notified by email.</p>
+<h3>Beginner, mornings</h3>
+<p>For sailors ages eight and older who are ready to learn and practice fundamental sailing skills while gaining confidence skippering 420s and Optimists. Sailors generally spend two to three years in the Beginner program before advancing. Students sail one to three per boat depending on skill. The goal is for each sailor to control the tiller and sail simultaneously and handle the boat independently. The curriculum covers nomenclature, knot tying, rigging, boat handling, wind direction, water safety and boat maintenance.</p>
+<h3>Intermediate, afternoons</h3>
+<p>A framework for racing practice, aimed at young people who have completed the Beginner course and are competent sailors. One-design racing in Optimists and 420s with a good deal of fun and friendly competition; young racers are encouraged to attend local events.</p>
+<h3>Adult lessons, evenings</h3>
+<p>For adults wanting to learn to sail, with a curriculum that parallels the Beginner course, one to three students per boat.</p>
+
+<h2 id="know">Things students and parents need to know</h2>
+<p><strong>Safety.</strong> All students take a swim test on the first day of each session. Life jackets are worn and fastened at all times on the water and on the docks. All instructors are US Sailing certified with basic first aid and CPR training. On-the-water activity is postponed for sudden weather changes, high winds or lightning. Bring sun protection.</p>
+<p><strong>What to bring.</strong> A Coast Guard approved Type III (vest style) life jacket; sneakers or closed-toe boat shoes (no flip-flops or open sandals); appropriate clothing including a change of clothes, jacket, hat, sunglasses, sun block and towel; a snack and water bottle (no glass). Label personal items and leave valuables at home.</p>
+<p><strong>Weather.</strong> Classes are held in inclement weather; on-the-water instruction may take place in the rain, and land-based instruction replaces it in severe weather.</p>
+<p><strong>Clubhouse.</strong> Please arrive on time and pick up promptly. Students wait for class on the clubhouse porch or the grass near the boat racks, and may not pass through the gate to the dock ramp without an instructor. Bags may be stored inside on the sailing school table during class. Youth students are accompanied by an instructor while in the clubhouse. Sailing school students may park along the left-hand property line in summer.</p>
+
+<h2 id="scholarship">Thomas Tarbell Memorial Scholarship</h2>
+<p>The Sailing School offers scholarships through the Thomas Tarbell Memorial Scholarship Fund, providing free lessons for children in need. For information contact the Sailing School Director.</p>
+
+    </div>
+  </div>
+  <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854 &middot; (603) 436-9303<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
+</body>
+</html>

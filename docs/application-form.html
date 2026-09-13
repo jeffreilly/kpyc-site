@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KPYC Membership Application</title>
+<style>
+  @page { size: Letter; margin: 0.5in 0.6in; @bottom-center { content: "Kittery Point Yacht Club  ·  Membership Application  ·  page " counter(page) " of " counter(pages); font-size: 8pt; color: #777; font-family: 'Segoe UI', system-ui, sans-serif; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-size: 9.5pt; color: #1a1a2e; line-height: 1.35; }
+  .head { display: flex; align-items: center; gap: 14px; border-bottom: 3px solid #0d3b6e; padding-bottom: 5px; margin-bottom: 6px; }
+  .head img { height: 36px; }
+  .head h1 { font-size: 17pt; color: #0d3b6e; line-height: 1.1; }
+  .head .sub { font-size: 9pt; color: #555; }
+  h2 { font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; background: #0d3b6e; padding: 2px 8px; margin: 5px 0 3px; border-radius: 3px; }
+  .row { display: flex; gap: 10px; margin-bottom: 3px; }
+  .f { flex: 1; }
+  .f label { display: block; font-size: 7pt; color: #555; text-transform: uppercase; letter-spacing: 0.04em; }
+  .f .line { border-bottom: 1px solid #333; height: 13px; }
+  .f.w2 { flex: 2; } .f.w3 { flex: 3; } .f.s { flex: 0.6; }
+  .checks { display: flex; flex-wrap: wrap; gap: 2px 12px; font-size: 9pt; margin: 2px 0 4px; }
+  .checks span::before { content: ""; display: inline-block; width: 10px; height: 10px; border: 1px solid #333; margin-right: 5px; vertical-align: -1px; }
+  .lines { border-bottom: 1px solid #333; height: 13px; margin-bottom: 3px; }
+  .small { font-size: 8.5pt; color: #444; }
+  .two { display: flex; gap: 14px; }
+  .two > div { flex: 1; }
+  .sig { display: flex; gap: 14px; margin-top: 8px; }
+  .box { border: 1px solid #0d3b6e; border-radius: 4px; padding: 6px 9px; font-size: 9pt; margin-top: 6px; page-break-inside: avoid; }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 4px 0 6px; }
+  th, td { text-align: left; padding: 3px 6px; border-bottom: 1px solid #ccc; }
+  th { background: #eef2f7; color: #0d3b6e; font-size: 8pt; text-transform: uppercase; }
+  .pb { page-break-before: always; }
+  .tbox { border: 1px solid #333; min-height: 118px; padding: 6px; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <img src="../assets/KPYC_burgee_wave.png" alt="KPYC burgee">
+  <div>
+    <h1>Kittery Point Yacht Club</h1>
+    <div class="sub">Membership Application &middot; PO Box 373, New Castle, NH 03854-0373 &middot; kpyc.org</div>
+  </div>
+</div>
+
+<h2>Contact information</h2>
+<div class="row"><div class="f w2"><label>Applicant name (first, last)</label><div class="line"></div></div><div class="f"><label>Date</label><div class="line"></div></div></div>
+<div class="row"><div class="f w3"><label>Mailing address</label><div class="line"></div></div></div>
+<div class="row"><div class="f w2"><label>City</label><div class="line"></div></div><div class="f s"><label>State</label><div class="line"></div></div><div class="f"><label>Zip code</label><div class="line"></div></div></div>
+<div class="row"><div class="f"><label>Primary phone</label><div class="line"></div></div><div class="f"><label>Alternate phone</label><div class="line"></div></div><div class="f w2"><label>Email address</label><div class="line"></div></div></div>
+
+<h2>Family information</h2>
+<div class="row"><div class="f w3"><label>Name of spouse or significant other</label><div class="line"></div></div></div>
+<div class="row"><div class="f w3"><label>Names of children (please include date of birth)</label><div class="line"></div></div></div>
+<div class="f"><label>Interests (check all that apply)</label></div>
+<div class="checks"><span>Small boat / Laser racing</span><span>Race Committee</span><span>Auxiliary yacht racing</span><span>Cruising</span><span>Rowing</span><span>Crewing for others</span><span>Fishing</span><span>Diving</span><span>Power boating</span><span>Other: ____________________</span></div>
+
+<h2>Vessel information</h2>
+<div class="row"><div class="f w2"><label>Vessel name</label><div class="line"></div></div><div class="f"><label>Type or class</label><div class="line"></div></div><div class="f s"><label>LOA</label><div class="line"></div></div></div>
+<div class="row"><div class="f"><label>Mooring location</label><div class="line"></div></div><div class="f s"><label>Hull color</label><div class="line"></div></div><div class="f"><label>Doc. / Reg. no.</label><div class="line"></div></div><div class="f s"><label>Sail no.</label><div class="line"></div></div></div>
+
+<h2>Application information</h2>
+<div class="f"><label>What is your reason for wishing to join KPYC?</label></div>
+<div class="lines"></div><div class="lines"></div><div class="lines"></div>
+<div class="f"><label>We feel all members should actively participate in the club. In what areas might you like to help out?</label></div>
+<div class="checks"><span>Social Committee</span><span>Race Committee / organizer</span><span>House asset maintenance and repair</span><span>Cruise organization</span><span>Junior sailing</span><span>Education</span><span>Newsletter</span><span>Quartermaster</span><span>Webmaster / computer</span><span>General assistance when and where needed</span><span>Other: ____________________</span></div>
+<div class="f"><label>In what other areas might you be able to contribute?</label></div>
+<div class="lines"></div><div class="lines"></div>
+
+<h2>Sponsorship and affiliation</h2>
+<p class="small">Two sponsors are required. Sponsors must be current members with six or more months of regular membership and may not be from the same household.</p>
+<div class="row"><div class="f w2"><label>Sponsor 1 name</label><div class="line"></div></div><div class="f w2"><label>Sponsor 1 email</label><div class="line"></div></div></div>
+<div class="row"><div class="f w3"><label>How do you know sponsor 1?</label><div class="line"></div></div></div>
+<div class="row"><div class="f w2"><label>Sponsor 2 name</label><div class="line"></div></div><div class="f w2"><label>Sponsor 2 email</label><div class="line"></div></div></div>
+<div class="row"><div class="f w3"><label>How do you know sponsor 2?</label><div class="line"></div></div></div>
+<div class="checks" style="margin-top:4px;"><span>I have an affiliation with another yacht club, past or present</span><span>No other affiliation</span></div>
+<div class="row"><div class="f w2"><label>Club name and location</label><div class="line"></div></div><div class="f s"><label>Past / present</label><div class="line"></div></div><div class="f"><label>Position</label><div class="line"></div></div></div>
+
+<div class="box">I, the undersigned, hereby apply for membership in the Kittery Point Yacht Club and, if accepted, agree to conform to the rules and regulations governing the operation of said club.
+  <div class="sig"><div class="f w2"><label>Applicant signature</label><div class="line"></div></div><div class="f"><label>Date</label><div class="line"></div></div></div>
+</div>
+
+<div class="pb"></div>
+<div class="head">
+  <img src="../assets/KPYC_burgee_wave.png" alt="">
+  <div><h1>Sponsor Testimonials</h1><div class="sub">Each sponsor: please describe how you know the applicant and why you recommend them for membership.</div></div>
+</div>
+<div class="two">
+  <div>
+    <div class="row"><div class="f w2"><label>Sponsor 1 name (print)</label><div class="line"></div></div></div>
+    <div class="tbox"></div>
+    <div class="row" style="margin-top:6px;"><div class="f w2"><label>Signature</label><div class="line"></div></div><div class="f"><label>Date</label><div class="line"></div></div></div>
+  </div>
+  <div>
+    <div class="row"><div class="f w2"><label>Sponsor 2 name (print)</label><div class="line"></div></div></div>
+    <div class="tbox"></div>
+    <div class="row" style="margin-top:6px;"><div class="f w2"><label>Signature</label><div class="line"></div></div><div class="f"><label>Date</label><div class="line"></div></div></div>
+  </div>
+</div>
+
+<h2>How to submit</h2>
+<p class="small">Mail this completed application, including both sponsor testimonials, with a check for your first year's dues to: <strong>Kittery Point Yacht Club, Treasurer, PO Box 373, New Castle, NH 03854-0373</strong>. Checks are payable to Kittery Point Yacht Club. Your application is voted on at the next monthly Board of Directors meeting. Approved applicants immediately become Probationary Members with full privileges and are contacted by the Treasurer with the Board's decision. Following the probationary period, each new member purchases one Share of stock in the club.</p>
+
+<table>
+  <thead><tr><th>Board meeting month when your application is considered</th><th>First year's dues</th></tr></thead>
+  <tbody>
+    <tr><td>January through July</td><td>100% of the annual dues</td></tr>
+    <tr><td>August</td><td>75%</td></tr>
+    <tr><td>September and October</td><td>50%</td></tr>
+    <tr><td>November and December</td><td>25%</td></tr>
+  </tbody>
+</table>
+<p class="small">Annual dues and the Share Value are set by the membership each January. As last published, annual dues were $400 and the Share Value $450 (two- and three-month payment plans are available for the Share). The Share Value is refundable on resignation, less any balances owed, as new members join. Please confirm current amounts with the Treasurer before sending payment.</p>
+
+<h2>For club use</h2>
+<div class="row"><div class="f"><label>Date received</label><div class="line"></div></div><div class="f"><label>Dues received</label><div class="line"></div></div><div class="f"><label>Board meeting date</label><div class="line"></div></div><div class="f"><label>Vote</label><div class="line"></div></div></div>
+<div class="row"><div class="f"><label>Probationary until</label><div class="line"></div></div><div class="f"><label>Share purchased</label><div class="line"></div></div><div class="f"><label>Certificate no.</label><div class="line"></div></div><div class="f"><label>Key issued</label><div class="line"></div></div></div>
+
+</body>
+</html>

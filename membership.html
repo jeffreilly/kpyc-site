@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership | Kittery Point Yacht Club</title>
+  <link rel="icon" href="assets/favicon.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 1.25rem 2rem; }
+    .nav { position: sticky; top: 0; z-index: 30; width: 100%; background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding: 0.55rem 0; }
+    .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; margin-right: 0.5rem; white-space: nowrap; }
+    .nav-brand img { height: 22px; width: auto; }
+    .nav-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.2rem; }
+    .nav-links a { color: #dbe6f5; font-size: 0.84rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.55rem; border-radius: 6px; display: inline-block; }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .nav-links a.active { background: #fff; color: #0d3b6e; }
+    .card { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.10); max-width: 860px; width: 100%; overflow: hidden; }
+    .card + .card { margin-top: 1.5rem; }
+    .card[id] { scroll-margin-top: 5rem; }
+    .card-header { background: linear-gradient(135deg, #0d3b6e 0%, #1a5fa8 100%); color: #fff; padding: 2rem 2rem 1.6rem; text-align: center; }
+    .card-header h1 { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
+    .card-header .est { font-size: 0.85rem; opacity: 0.7; letter-spacing: 0.04em; }
+    .card-header img.burgee { height: 54px; width: auto; margin-bottom: 0.6rem; }
+    .card-body { padding: 1.75rem 2rem 2rem; }
+    h2 { font-size: 1.15rem; font-weight: 700; color: #0d3b6e; margin: 1.4rem 0 0.5rem; }
+    h2:first-child { margin-top: 0; }
+    h3 { font-size: 0.98rem; font-weight: 700; color: #1a5fa8; margin: 1rem 0 0.35rem; }
+    p { font-size: 0.97rem; color: #444; margin-bottom: 0.9rem; }
+    ul, ol { margin: 0.2rem 0 0.9rem 1.4rem; color: #444; font-size: 0.95rem; }
+    li { margin-bottom: 0.3rem; }
+    a { color: #0d3b6e; }
+    table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 1rem; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #eceff3; vertical-align: top; }
+    th { color: #0d3b6e; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:last-child td { border-bottom: none; }
+    .rules-box { margin: 0.75rem 0 1.25rem; background: #fdf1f1; border: 1px solid #f3d4d4; border-radius: 10px; padding: 0.85rem 1rem; }
+    .rules-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #7a1f1f; margin-bottom: 0.45rem; }
+    .rules-box ul, .rules-box ol { margin-bottom: 0; color: #7a1f1f; }
+    .note { background: #fff8e1; border: 1px solid #f0d060; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.88rem; color: #6b5200; margin: 0.6rem 0 1.1rem; }
+    .info { background: #eef4fb; border: 1px solid #cfdff2; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.9rem; color: #1e3a5f; margin: 0.6rem 0 1.1rem; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 0.6rem; }
+    .tile { display: block; background: #f8f9fb; border: 1px solid #eceff3; border-radius: 10px; padding: 0.9rem 1rem; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
+    .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
+    .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
+    .btn { display: inline-block; background: #0d3b6e; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 8px; margin: 0.2rem 0.4rem 0.6rem 0; }
+    .btn.secondary { background: #e9eef6; color: #0d3b6e; }
+    .btn:hover { opacity: 0.92; }
+    .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 1rem; }
+    .photos img { width: 100%; height: auto; border-radius: 8px; border: 1px solid #e3e6ea; }
+    .photos .cap { font-size: 0.78rem; color: #777; margin-top: 0.2rem; }
+    .toc { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin: 0 0 1rem; }
+    .toc a { font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+    footer { text-align: center; font-size: 0.78rem; color: #aaa; margin-top: 2rem; }
+    @media (max-width: 600px) { .card-body { padding: 1.25rem 1.1rem 1.5rem; } .nav-links a { font-size: 0.8rem; padding: 0.25rem 0.45rem; } }
+</style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="membership.html" class="active">Membership</a></li><li><a href="new-members.html">New Members</a></li><li><a href="launch.html">Launch</a></li><li><a href="clubhouse.html">Clubhouse</a></li><li><a href="docks-moorings.html">Docks &amp; Moorings</a></li><li><a href="sailing-school.html">Sailing School</a></li><li><a href="social-education.html">Social &amp; Education</a></li><li><a href="documents.html">Documents</a></li></ul></div></nav>
+  <div class="card">
+    <div class="card-header">
+      <img class="burgee" src="assets/KPYC_burgee_wave.png" alt="KPYC burgee">
+      <h1>Membership</h1>
+      <div class="est">How to join the Kittery Point Yacht Club</div>
+    </div>
+    <div class="card-body">
+      <ul class="toc"><li><a href="#join">How to join</a></li><li><a href="#dues">Dues and Share</a></li><li><a href="#application">Application</a></li><li><a href="#faq">FAQ</a></li></ul>
+      
+<h2 id="join">How to join</h2>
+<p>Membership in the Kittery Point Yacht Club is open to individuals who enjoy boating and want to be part of an active, volunteer-run club. Joining is a two-step process set out in the club By-Laws.</p>
+<ol>
+  <li><strong>Apply.</strong> Complete the membership application, including testimonials from two sponsors. Sponsors must be current members with at least six months of membership and may not be from the same household. Mail the application to the Treasurer with your first year's dues (see the schedule below).</li>
+  <li><strong>Board vote.</strong> Applications are reviewed and voted on at the next monthly Board of Directors meeting. Approved applicants immediately become Probationary Members with all the privileges of regular members, and the Treasurer will contact you with the Board's decision. Probationary status ends automatically at the following Board meeting unless a hold is placed under the By-Laws.</li>
+  <li><strong>Purchase your Share.</strong> KPYC is an equity club. Each membership purchases one Share of stock representing a partial ownership in the club's net assets. The Share Value is set annually by the membership and is refundable when you resign, less any outstanding balances; the By-Laws provide that refunds are paid as new members join, so there can be a short waiting list.</li>
+</ol>
+<p>Spouses and children under 18 in the member's household are covered by the one Share, with one vote per Share. Membership is limited to 200 regular memberships, so a waiting list is maintained in the order applications are received.</p>
+
+<h2 id="dues">Dues and Share Value</h2>
+<div class="note">Amounts below are as last published by the club (2025). Confirm current figures with the Treasurer, Michael Millikan, before sending payment.</div>
+<table>
+  <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+  <tbody>
+    <tr><td>Annual dues (regular membership)</td><td>$400</td></tr>
+    <tr><td>Share Value (one-time, refundable on resignation)</td><td>$450, with two- or three-month payment plans available</td></tr>
+  </tbody>
+</table>
+<h3>First year's dues are prorated by the month your application is voted on</h3>
+<table>
+  <thead><tr><th>Board meeting month</th><th>First year's dues</th></tr></thead>
+  <tbody>
+    <tr><td>January through July</td><td>$400 (100%)</td></tr>
+    <tr><td>August</td><td>$300 (75%)</td></tr>
+    <tr><td>September and October</td><td>$200 (50%)</td></tr>
+    <tr><td>November and December</td><td>$100 (25%)</td></tr>
+  </tbody>
+</table>
+<p>Checks are payable to Kittery Point Yacht Club and mailed to: Kittery Point Yacht Club, Treasurer, PO Box 373, New Castle, NH 03854-0373. Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee.</p>
+
+<h2 id="application">Application form</h2>
+<p>Print the application, complete it with your two sponsors, and mail it with your first year's dues to the Treasurer. Questions about the process go to the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348).</p>
+<a class="btn" href="docs/KPYC_Membership_Application_2026.pdf">Download the Membership Application (PDF)</a>
+<a class="btn secondary" href="docs/KPYC_ByLaws_January_2024.pdf">KPYC Constitution and By-Laws (PDF)</a>
+<p style="font-size:0.85rem;color:#777;">The application mirrors the online form used on the club's previous website, with the sponsor testimonial section restored from the original printed form. An online form will return with the new website.</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+<h3>How do I get a clubhouse key?</h3>
+<p>You receive a key automatically once accepted as a member. For an extra key, contact the Treasurer.</p>
+<h3>How do I get a burgee or club gear?</h3>
+<p>KPYC burgees, shirts and other items are sold at the clubhouse. Contact the Quartermaster, Adam Shapiro (<a href="mailto:adamhshapiro@gmail.com">adamhshapiro@gmail.com</a>).</p>
+<h3>How do I rent the clubhouse for a private event?</h3>
+<p>See the <a href="clubhouse.html#rentals">Clubhouse Rentals</a> section. Rentals are for members only, in the off-season.</p>
+<h3>When are the membership meetings?</h3>
+<p>Two a year: one in October, when Directors are elected and trophies awarded, and one in January, when dues, the Share Value and any By-Law changes are set. This year's October meeting is Thursday, October 22, 2026.</p>
+
+    </div>
+  </div>
+  <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854 &middot; (603) 436-9303<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
+</body>
+</html>

@@ -261,9 +261,27 @@
     .contact-info a:hover {
       text-decoration: underline;
     }
+    .nav { position: sticky; top: 0; z-index: 30; width: 100%; background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding: 0.55rem 0; }
+    .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; margin-right: 0.5rem; white-space: nowrap; }
+    .nav-brand img { height: 22px; width: auto; }
+    .nav-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.2rem; }
+    .nav-links a { color: #dbe6f5; font-size: 0.84rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.55rem; border-radius: 6px; display: inline-block; }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .nav-links a.active { background: #fff; color: #0d3b6e; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 0.6rem; }
+    .tile { display: block; background: #f8f9fb; border: 1px solid #eceff3; border-radius: 10px; padding: 0.9rem 1rem; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
+    .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
+    .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
+    body { padding-top: 0; justify-content: flex-start; }
+    .nav { margin-top: 0; }
+    .toc-card { top: 3.4rem; }
+    .card[id] { scroll-margin-top: 8rem; }
   </style>
 </head>
 <body>
+<!-- nav:start --><nav class="nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a><ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="membership.html">Membership</a></li><li><a href="new-members.html">New Members</a></li><li><a href="launch.html">Launch</a></li><li><a href="clubhouse.html">Clubhouse</a></li><li><a href="docks-moorings.html">Docks &amp; Moorings</a></li><li><a href="sailing-school.html">Sailing School</a></li><li><a href="social-education.html">Social &amp; Education</a></li><li><a href="documents.html">Documents</a></li></ul></div></nav><!-- nav:end -->
   <div class="card toc-card">
     <div class="card-body">
       <ul class="toc-list">
@@ -293,6 +311,26 @@
       <p>
         We appreciate your patience and look forward to seeing you on the water.
       </p>
+    </div>
+  </div>
+
+
+  <div class="card" id="club-info">
+    <div class="card-header">
+      <h1>Club Information</h1>
+      <div class="est">Rules, guides and how to join, while the full website is rebuilt</div>
+    </div>
+    <div class="card-body">
+      <div class="tiles">
+        <a class="tile" href="membership.html"><div class="t">Membership</div><div class="d">How to join, dues and Share Value, application form</div></a>
+        <a class="tile" href="new-members.html"><div class="t">New Member Guide</div><div class="d">Getting around the clubhouse and the club year</div></a>
+        <a class="tile" href="launch.html"><div class="t">Launch</div><div class="d">Hours, VHF 68, rules and etiquette</div></a>
+        <a class="tile" href="clubhouse.html"><div class="t">Clubhouse</div><div class="d">Facilities, house rules, off-season rentals</div></a>
+        <a class="tile" href="docks-moorings.html"><div class="t">Docks &amp; Moorings</div><div class="d">Float, dinghy and kayak storage, river and Shoals moorings</div></a>
+        <a class="tile" href="sailing-school.html"><div class="t">Sailing School</div><div class="d">Programs, what to bring, scholarship</div></a>
+        <a class="tile" href="social-education.html"><div class="t">Social &amp; Education</div><div class="d">The season's events, racing, member classes</div></a>
+        <a class="tile" href="documents.html"><div class="t">Documents</div><div class="d">By-Laws, application, board policies</div></a>
+      </div>
     </div>
   </div>
 

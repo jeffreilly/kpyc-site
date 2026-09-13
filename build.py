@@ -1,0 +1,491 @@
+#!/usr/bin/env python3
+"""Build the KPYC interim site pages from shared templates.
+
+Run `python3 build.py` from the repo root. index.html is hand-maintained
+(notice, contacts, launch hours) and is not touched by this script except
+for the shared navigation bar, which is inserted between the markers
+<!-- nav:start --> and <!-- nav:end -->.
+"""
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+
+NAV = [
+    ("index.html", "Home"),
+    ("membership.html", "Membership"),
+    ("new-members.html", "New Members"),
+    ("launch.html", "Launch"),
+    ("clubhouse.html", "Clubhouse"),
+    ("docks-moorings.html", "Docks &amp; Moorings"),
+    ("sailing-school.html", "Sailing School"),
+    ("social-education.html", "Social &amp; Education"),
+    ("documents.html", "Documents"),
+]
+
+CSS = """
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 1.25rem 2rem; }
+    .nav { position: sticky; top: 0; z-index: 30; width: 100%; background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding: 0.55rem 0; }
+    .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; margin-right: 0.5rem; white-space: nowrap; }
+    .nav-brand img { height: 22px; width: auto; }
+    .nav-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.2rem; }
+    .nav-links a { color: #dbe6f5; font-size: 0.84rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.55rem; border-radius: 6px; display: inline-block; }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .nav-links a.active { background: #fff; color: #0d3b6e; }
+    .card { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.10); max-width: 860px; width: 100%; overflow: hidden; }
+    .card + .card { margin-top: 1.5rem; }
+    .card[id] { scroll-margin-top: 5rem; }
+    .card-header { background: linear-gradient(135deg, #0d3b6e 0%, #1a5fa8 100%); color: #fff; padding: 2rem 2rem 1.6rem; text-align: center; }
+    .card-header h1 { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
+    .card-header .est { font-size: 0.85rem; opacity: 0.7; letter-spacing: 0.04em; }
+    .card-header img.burgee { height: 54px; width: auto; margin-bottom: 0.6rem; }
+    .card-body { padding: 1.75rem 2rem 2rem; }
+    h2 { font-size: 1.15rem; font-weight: 700; color: #0d3b6e; margin: 1.4rem 0 0.5rem; }
+    h2:first-child { margin-top: 0; }
+    h3 { font-size: 0.98rem; font-weight: 700; color: #1a5fa8; margin: 1rem 0 0.35rem; }
+    p { font-size: 0.97rem; color: #444; margin-bottom: 0.9rem; }
+    ul, ol { margin: 0.2rem 0 0.9rem 1.4rem; color: #444; font-size: 0.95rem; }
+    li { margin-bottom: 0.3rem; }
+    a { color: #0d3b6e; }
+    table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 1rem; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #eceff3; vertical-align: top; }
+    th { color: #0d3b6e; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:last-child td { border-bottom: none; }
+    .rules-box { margin: 0.75rem 0 1.25rem; background: #fdf1f1; border: 1px solid #f3d4d4; border-radius: 10px; padding: 0.85rem 1rem; }
+    .rules-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #7a1f1f; margin-bottom: 0.45rem; }
+    .rules-box ul, .rules-box ol { margin-bottom: 0; color: #7a1f1f; }
+    .note { background: #fff8e1; border: 1px solid #f0d060; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.88rem; color: #6b5200; margin: 0.6rem 0 1.1rem; }
+    .info { background: #eef4fb; border: 1px solid #cfdff2; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.9rem; color: #1e3a5f; margin: 0.6rem 0 1.1rem; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 0.6rem; }
+    .tile { display: block; background: #f8f9fb; border: 1px solid #eceff3; border-radius: 10px; padding: 0.9rem 1rem; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
+    .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
+    .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
+    .btn { display: inline-block; background: #0d3b6e; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 8px; margin: 0.2rem 0.4rem 0.6rem 0; }
+    .btn.secondary { background: #e9eef6; color: #0d3b6e; }
+    .btn:hover { opacity: 0.92; }
+    .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 1rem; }
+    .photos img { width: 100%; height: auto; border-radius: 8px; border: 1px solid #e3e6ea; }
+    .photos .cap { font-size: 0.78rem; color: #777; margin-top: 0.2rem; }
+    .toc { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin: 0 0 1rem; }
+    .toc a { font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+    footer { text-align: center; font-size: 0.78rem; color: #aaa; margin-top: 2rem; }
+    @media (max-width: 600px) { .card-body { padding: 1.25rem 1.1rem 1.5rem; } .nav-links a { font-size: 0.8rem; padding: 0.25rem 0.45rem; } }
+"""
+
+
+def nav_html(active):
+    items = "".join(
+        f'<li><a href="{href}"{" class=\"active\"" if href == active else ""}>{label}</a></li>'
+        for href, label in NAV
+    )
+    return (
+        '<nav class="nav"><div class="nav-inner">'
+        '<a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a>'
+        f'<ul class="nav-links">{items}</ul></div></nav>'
+    )
+
+
+def page(filename, title, subtitle, body, toc=None):
+    toc_html = ""
+    if toc:
+        toc_html = '<ul class="toc">' + "".join(f'<li><a href="#{a}">{t}</a></li>' for a, t in toc) + "</ul>"
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} | Kittery Point Yacht Club</title>
+  <link rel="icon" href="assets/favicon.png">
+  <style>{CSS}</style>
+</head>
+<body>
+  {nav_html(filename)}
+  <div class="card">
+    <div class="card-header">
+      <img class="burgee" src="assets/KPYC_burgee_wave.png" alt="KPYC burgee">
+      <h1>{title}</h1>
+      <div class="est">{subtitle}</div>
+    </div>
+    <div class="card-body">
+      {toc_html}
+      {body}
+    </div>
+  </div>
+  <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854 &middot; (603) 436-9303<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
+</body>
+</html>
+"""
+    (ROOT / filename).write_text(html)
+    print("wrote", filename)
+
+
+# ---------------------------------------------------------------- pages
+
+MEMBERSHIP = """
+<h2 id="join">How to join</h2>
+<p>Membership in the Kittery Point Yacht Club is open to individuals who enjoy boating and want to be part of an active, volunteer-run club. Joining is a two-step process set out in the club By-Laws.</p>
+<ol>
+  <li><strong>Apply.</strong> Complete the membership application, including testimonials from two sponsors. Sponsors must be current members with at least six months of membership and may not be from the same household. Mail the application to the Treasurer with your first year's dues (see the schedule below).</li>
+  <li><strong>Board vote.</strong> Applications are reviewed and voted on at the next monthly Board of Directors meeting. Approved applicants immediately become Probationary Members with all the privileges of regular members, and the Treasurer will contact you with the Board's decision. Probationary status ends automatically at the following Board meeting unless a hold is placed under the By-Laws.</li>
+  <li><strong>Purchase your Share.</strong> KPYC is an equity club. Each membership purchases one Share of stock representing a partial ownership in the club's net assets. The Share Value is set annually by the membership and is refundable when you resign, less any outstanding balances; the By-Laws provide that refunds are paid as new members join, so there can be a short waiting list.</li>
+</ol>
+<p>Spouses and children under 18 in the member's household are covered by the one Share, with one vote per Share. Membership is limited to 200 regular memberships, so a waiting list is maintained in the order applications are received.</p>
+
+<h2 id="dues">Dues and Share Value</h2>
+<div class="note">Amounts below are as last published by the club (2025). Confirm current figures with the Treasurer, Michael Millikan, before sending payment.</div>
+<table>
+  <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+  <tbody>
+    <tr><td>Annual dues (regular membership)</td><td>$400</td></tr>
+    <tr><td>Share Value (one-time, refundable on resignation)</td><td>$450, with two- or three-month payment plans available</td></tr>
+  </tbody>
+</table>
+<h3>First year's dues are prorated by the month your application is voted on</h3>
+<table>
+  <thead><tr><th>Board meeting month</th><th>First year's dues</th></tr></thead>
+  <tbody>
+    <tr><td>January through July</td><td>$400 (100%)</td></tr>
+    <tr><td>August</td><td>$300 (75%)</td></tr>
+    <tr><td>September and October</td><td>$200 (50%)</td></tr>
+    <tr><td>November and December</td><td>$100 (25%)</td></tr>
+  </tbody>
+</table>
+<p>Checks are payable to Kittery Point Yacht Club and mailed to: Kittery Point Yacht Club, Treasurer, PO Box 373, New Castle, NH 03854-0373. Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee.</p>
+
+<h2 id="application">Application form</h2>
+<p>Print the application, complete it with your two sponsors, and mail it with your first year's dues to the Treasurer. Questions about the process go to the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348).</p>
+<a class="btn" href="docs/KPYC_Membership_Application_2026.pdf">Download the Membership Application (PDF)</a>
+<a class="btn secondary" href="docs/KPYC_ByLaws_January_2024.pdf">KPYC Constitution and By-Laws (PDF)</a>
+<p style="font-size:0.85rem;color:#777;">The application mirrors the online form used on the club's previous website, with the sponsor testimonial section restored from the original printed form. An online form will return with the new website.</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+<h3>How do I get a clubhouse key?</h3>
+<p>You receive a key automatically once accepted as a member. For an extra key, contact the Treasurer.</p>
+<h3>How do I get a burgee or club gear?</h3>
+<p>KPYC burgees, shirts and other items are sold at the clubhouse. Contact the Quartermaster, Adam Shapiro (<a href="mailto:adamhshapiro@gmail.com">adamhshapiro@gmail.com</a>).</p>
+<h3>How do I rent the clubhouse for a private event?</h3>
+<p>See the <a href="clubhouse.html#rentals">Clubhouse Rentals</a> section. Rentals are for members only, in the off-season.</p>
+<h3>When are the membership meetings?</h3>
+<p>Two a year: one in October, when Directors are elected and trophies awarded, and one in January, when dues, the Share Value and any By-Law changes are set. This year's October meeting is Thursday, October 22, 2026.</p>
+"""
+
+NEW_MEMBERS = """
+<p>Welcome to the Kittery Point Yacht Club. We want everyone to enjoy their association with the Club, so this guide will help you navigate your way around. Please also read the <a href="clubhouse.html#rules">Clubhouse Rules</a>, the <a href="documents.html#policies">Board of Directors' Established Policies</a>, and the <a href="docs/KPYC_ByLaws_January_2024.pdf">Constitution and By-Laws</a>. If you have a question these do not answer, contact any member of the Board of Directors.</p>
+
+<h2 id="welcome">Welcome aboard</h2>
+<p>On behalf of the members, officers, directors and staff, we are thrilled you have chosen to join our family. As a new member you will receive this reference guide, the Launch Rules and Etiquette, the Board of Directors' Policies, the Clubhouse Rules, the Constitution and By-Laws, a burgee, a clubhouse key, the season's social calendar, club contacts, and your Member Share Certificate.</p>
+<p>Please let us know how we can best match your skills to the volunteer tasks and projects. Volunteerism is at the root of our success, so come join in the fun! The Board of Directors meets monthly; the date is posted on the clubhouse bulletin board. Feel free to stop by, and contact the Membership Chair, Chris Snow, with any questions.</p>
+
+<h2 id="structure">How the club is organized</h2>
+<p>The Club has a nine-member Board of Directors that meets monthly. Three Directors are elected each year by the membership, for three-year terms, at the annual meeting in October. The Board elects the Commodore, Vice Commodore, Rear Commodore, Fleet Captain, Secretary and Treasurer as Club Officers, and appoints a Quartermaster. Members volunteer to chair and serve on the standing committees: House, Race, Social, Junior Activities (Sailing School), Education, Membership, Auditing and Election, along with the Launch Services Committee. There is plenty of need for volunteers and we would welcome your involvement. Current officers and chairs are listed on the <a href="index.html#contacts">contacts page</a>.</p>
+
+<h2 id="using">Using the clubhouse</h2>
+<p>The clubhouse and deck are for everyone's use, so please clean up after yourself. You are welcome to use the clubhouse, deck, grill and kitchen for yourselves and your guests. As a member you may host an indoor gathering with guests without renting the club, but other members may be coming and going. To decorate the club or send out invitations for an event, you must reserve it as a rental (off-season only; see <a href="clubhouse.html#rentals">Clubhouse Rentals</a>).</p>
+
+<h3>Front door</h3>
+<p>To keep the front door unlocked during your stay: from the inside, find the pin hanging on the panic bar (older instructions refer to an Allen wrench stowed on the right-hand door casing). With the panic bar held down, insert the pin in the hole on top of the bar; the bar is now locked down. To undo this, pull the pin.</p>
+
+<h3>Cleaning</h3>
+<p>The club has a cleaning person for the larger tasks, but keeping the clubhouse neat is every member's responsibility. Brooms, dustpans and the vacuum are behind the kitchen door; the central vacuum outlet is low on the dart board wall; the wet mop and bucket are in the shower opposite the bathroom; trash bags and paper towels are under the kitchen sink; the dumpster is at the right rear of the property. Bag recyclable cans and leave them beside the dumpster.</p>
+
+<h3>Parking</h3>
+<p>Parking is at a premium in summer. On Tuesday and Thursday race nights, please carpool when possible and pack in to the right of the clubhouse. In summer the parking along the left-hand property line is reserved for sailing school students. See the parking plan posted in the clubhouse, and please respect the spaces for our upstairs tenants.</p>
+
+<h3>Noise</h3>
+<p>Out of respect for our apartment tenants upstairs and our residential neighbors to the right of the clubhouse, no activities are conducted outdoors on that side of the building and noise is kept to a minimum. Noise is restricted to conversational tones after 10:00 PM and there is to be no noise after 11:00 PM.</p>
+
+<h3>Chairs and tables</h3>
+<p>Chairs and tables are behind the roll-out cabinet in the kitchen. Note the labeled stacking order so everything fits back where it belongs. One long table stays out permanently in the rear right-hand corner.</p>
+
+<h3>Ice and rubbish</h3>
+<p>Bags of ice are in the freezer in the wooden box on the fixed pier, on the honor system. Rubbish from your boat goes in the dumpster in the parking lot.</p>
+
+<h3>Lighting the parking lot</h3>
+<p>In the evening, please light the parking lot after dark. On the kitchen wall to the right of the telephone are four switches labeled North, South, East and West floodlight zones: South lights the front parking area, East the right-hand side of the clubhouse, and North and West the exterior deck. If you are the last to leave, shut off all lights.</p>
+
+<h3>Fireplace</h3>
+<p>The fireplace can be smoky, especially on windy days. Place a large log at the extreme front of the grate and build your fire behind it as a smoke deflector. Follow the damper instructions printed on the chain at the front left of the fireplace. Light a newspaper bundle and hold it up the chimney to start a draft, then light your fire. Firewood is outdoors along the left property line fence. When you leave, leave the damper open and do not dispose of the ashes.</p>
+
+<h3>Last to leave</h3>
+<p>If you are the last member to leave, check that all doors and windows are locked, all stove burners and oven elements are off, all interior and exterior lights (including floodlights) are off, and the heat is turned down to 55 &deg;F.</p>
+
+<h2 id="season">The club year</h2>
+<p><strong>Work days.</strong> In spring and fall we hold "Docks In" and "Docks Out" work days from 8:00 AM to noon, with coffee and lunch provided. All members are asked to help; it is a great way to meet people and it keeps dues reasonable. Docks Out 2026 is Saturday, October 17.</p>
+<p><strong>Membership meetings.</strong> Two a year: October (Director elections and trophies) and January (dues, Share Value, By-Law changes). One member per family Share is expected to attend. A quorum is required, so please plan to join us. The 2026 October meeting is Thursday, October 22.</p>
+<p><strong>Social functions.</strong> The Social Committee runs events through the season; see <a href="social-education.html">Social &amp; Education</a>. Members may always bring guests. There is no dress code.</p>
+<p><strong>Launch, docks and moorings.</strong> See the <a href="launch.html">Launch</a> and <a href="docks-moorings.html">Docks &amp; Moorings</a> pages.</p>
+<p><strong>Sailing School.</strong> The club operates the KPYC Sailing School for kids and adults; see <a href="sailing-school.html">Sailing School</a>.</p>
+<p><strong>Club gear.</strong> Clothing and other items with the KPYC burgee are available from the Quartermaster, Adam Shapiro.</p>
+"""
+
+LAUNCH = """
+<h2 id="hours">Hours</h2>
+<p>The launch operates from late spring into fall and monitors <strong>VHF channel 68</strong> during operating hours. There is no per-ride fee; annual dues support the service. Tipping the driver is at your discretion.</p>
+<table>
+  <thead><tr><th>Day</th><th>Hours</th></tr></thead>
+  <tbody>
+    <tr><td>Tuesday and Thursday</td><td>2:00 PM to 9:00 PM</td></tr>
+    <tr><td>Friday</td><td>11:00 AM to 8:00 PM</td></tr>
+    <tr><td>Saturday and Sunday</td><td>9:00 AM to 8:00 PM</td></tr>
+  </tbody>
+</table>
+<div class="note">Hours change with the season and driver availability; holiday hours are announced by email. Questions about launch service go to the Launch Services Committee chair, Brendan Cooney (<a href="mailto:br_cooney@mac.com">br_cooney@mac.com</a>), or the Vice Commodore, Kevin McCoole, for launch drivers.</div>
+<p>Our launch makes over a thousand trips each summer, so please have all your crew present before venturing out to your boat.</p>
+
+<h2 id="rules">Launch rules and etiquette</h2>
+<div class="rules-box">
+  <div class="rules-label">Strictly enforced</div>
+  <ul>
+    <li>Maximum capacity: six passengers</li>
+    <li>No open containers at any time</li>
+    <li>The driver's directions on seating, trim, boarding and safety are to be followed without exception</li>
+  </ul>
+</div>
+<ol>
+  <li>Those requesting and utilizing the KPYC launch service do so at their own risk and agree to hold harmless The Kittery Point Yacht Club, its Board of Directors, officers, employees and members from any and all damage, loss or injury resulting from said launch service.</li>
+  <li>Launch capacity is limited to six (6) passengers.</li>
+  <li>The "No Open Container" rule is in effect at all times.</li>
+  <li>Directions of the launch driver with respect to seating positions, trim of the boat, embarking, debarking and any other safety related issues are to be followed without exception.</li>
+  <li>In the interest of better service and efficiency, the launch driver may at his or her discretion, and not exceeding launch capacity, take aboard individuals or parties traveling to the same or nearby destination regardless of their position in the queue awaiting launch service.</li>
+  <li>All members and guests will maintain decorum that is conducive to good order and is considerate of others.</li>
+  <li>Unaccompanied non-members and guests will be afforded launch service to a member's boat provided that member is already on board his or her vessel.</li>
+  <li>Please plan around the posted hours and make alternative transportation arrangements as needed.</li>
+  <li>Comments, complaints, issues or suggestions on any aspect of Club operations should be directed to any Director, the House Committee Chair, or the Commodore. Contact information is on the <a href="index.html#contacts">contacts page</a> and the Club bulletin board.</li>
+</ol>
+"""
+
+CLUBHOUSE = """
+<h2 id="facilities">Facilities</h2>
+<div class="photos">
+  <div><img src="assets/clubhouse_front.jpg" alt="KPYC clubhouse"><div class="cap">The clubhouse at 328 Portsmouth Avenue, Goat Island</div></div>
+  <div><img src="assets/deck_view_river.jpg" alt="Deck view of the Piscataqua"><div class="cap">The deck and the Piscataqua River</div></div>
+</div>
+<p>Kittery Point Yacht Club is located in New Castle, NH, on the southern shore of the Piscataqua River. Its clubhouse, on Goat Island, stands opposite Seavey Island, home of the historic Portsmouth Naval Shipyard. Ships from all over the world pass before it, vying with local lobster and fishing boats during the week and hundreds of pleasure boats on holidays and weekends. The clubhouse has a wrap-around deck, a kitchen and bar, and one shower. It is not wheelchair accessible; there are two broad steps up to the deck. Per the occupancy permit, the limit is 70 persons in the club at any one time.</p>
+<p>A member of US Sailing, KPYC is well represented in local, regional and occasionally national events, with members racing and cruising a variety of boats. The club sponsors the KPYC Sailing School, the Seacoast's only public sailing school and youth racing program. Members are drawn mainly from New Hampshire and Maine, and most enjoy boating and organized social activities during the main season from May to October, with potluck dinners and casual gatherings through the year.</p>
+
+<h2 id="rules">Clubhouse rules</h2>
+<ol>
+  <li>The Clubhouse is for the exclusive use of members and invited guests.</li>
+  <li>There shall be no social activity conducted on club property east of the building.</li>
+  <li>No pets allowed on the premises except going to and from a boat. All pets must be on a leash. Members must clean up after their animals.</li>
+  <li>There shall be no borrowing or renting of Club property.</li>
+  <li>No child under 18 may be allowed the use of the Clubhouse unless accompanied by a member or parent responsible for his or her supervision.</li>
+  <li>Members shall be held responsible for any property damaged or lost by themselves or their guests.</li>
+  <li>Guests, other than visiting yachtsmen, must be accompanied by a member and that member shall be held responsible for the conduct of the guest while on the premises. Guests of members may be taken to a member's boat by the launch only when the member is already on board.</li>
+  <li>The last member to leave the Clubhouse is responsible for locking doors and windows, turning out lights, and turning down the heat.</li>
+  <li>The Clubhouse is available for member use and shall be left "shipshape" after each use, especially the bar and galley.</li>
+  <li>Application by a member for rental of the Club for a private event shall be made to the Social Committee on the form provided. The Club will not be rented from May 1 to October 15.</li>
+  <li>The member holding a private party at the Club shall be present at all times and shall be responsible for proper conduct of guests and all damage or loss to the Club. Out of respect for our tenant, noise levels are restricted to conversational tones after 10:00 PM, with no noise after 11:00 PM. Clean-up following rentals must begin no earlier than 8:00 AM on the day following the event and be completed no later than 10:00 AM.</li>
+  <li>Visiting yachtsmen from other yacht clubs may be allowed use of the club facilities during normal club hours (Steward or dock attendant on duty).</li>
+  <li>Tie-up on the dock is limited to pick up, drop off, and provisioning only. In case of an emergency, or if there is a need to use the dock for an extended period, call the House Committee Chair.</li>
+  <li>Only Club members and Sailing School students will be allowed to park on the premises on Tuesday nights. Guests are to park on the road or elsewhere. This policy is in effect from Docks In to Docks Out.</li>
+  <li>The Club facility will be locked when no members are present and when the Steward is not on the premises.</li>
+  <li>Sailing School students will be monitored by the instructors, who will enforce the house rules.</li>
+  <li>Neither profanity nor other offensive behavior will be tolerated; a member's suspension or expulsion could result.</li>
+  <li>There shall be no smoking in the Clubhouse.</li>
+</ol>
+
+<h2 id="rentals">Clubhouse rentals</h2>
+<p>Club members may rent the Club for private functions on a first come, first served basis after October 15 and before May 1. No rentals are permitted from May 1 through October 15. Any member who rents the Club must be present at the event, and the rental and deposit checks must be written by the member, not by someone they are sponsoring. Members must reserve the Club if they want exclusive use of the Clubhouse or plan to decorate it; an event that involves decorating and inviting people is a "party" under Board policy and is subject to the rental policy. The Club may not be used for commercial purposes.</p>
+<div class="note">The last published rental fee was $300 for members plus a refundable deposit check. Confirm the current fee, deposit and payment method with the House Chair, Dylan Kimmel (<a href="mailto:dkimmel@neintegration.com">dkimmel@neintegration.com</a>), or the Social Chair, Alison Magill, before booking. While the website is down, reservations are made by email to the House Chair rather than through the online form.</div>
+<h3>How to reserve</h3>
+<ol>
+  <li>Check the calendar on the clubhouse wall for your date, then email the House Chair with your name, phone, requested date, start and end times, and expected number of guests.</li>
+  <li>Sign the Release and Hold Harmless Agreement and agree to pay for any damage to the club.</li>
+  <li>Pay the rental fee and provide the deposit check. Once confirmed, your reservation is posted on the clubhouse calendar.</li>
+  <li>During the event, post a sign on the front door: "Private Member Event Underway". The club's beverage refrigerator is not available during rentals.</li>
+  <li>To cancel, notify the House Chair immediately; payments are refunded and the date is released.</li>
+</ol>
+<h3>Rental rules</h3>
+<p>Our cleaning person tries to schedule the weekly cleaning the day before your rental, but has no control over what happens between the cleaning and your arrival. Chairs and tables are behind the roll-out cabinet in the kitchen in a labeled stacking order; the one long table stays out in the rear right-hand corner. If your function runs into the evening, light the parking lot from the four floodlight switches on the kitchen wall. Noise is restricted to conversational tones after 10:00 PM and there is to be no noise after 11:00 PM.</p>
+<p>It is your responsibility to leave the Clubhouse shipshape. All rentals must, at the end of the function:</p>
+<ul>
+  <li>Wet mop (warm water only) the kitchen, bathrooms and hardwood floors, and vacuum the carpets.</li>
+  <li>Clean bathroom toilets and sinks.</li>
+  <li>Wash, dry and put away any pots, pans, dishes or utensils used; wipe down the bar and kitchen counters.</li>
+  <li>Take out all trash (kitchen and bathrooms) and replace with clean bags; bag recyclable cans beside the dumpster.</li>
+  <li>Check that all doors and windows are locked, no burners or oven elements are on, lights are out including the floodlights, and the heat is turned down.</li>
+</ul>
+<p>If clean-up is deferred to the following day, it must start no earlier than 8:00 AM and finish by 10:00 AM. If additional cleaning is needed, the deposit may be used to pay for it.</p>
+"""
+
+DOCKS = """
+<h2 id="tieup">Front float and dinghy docks</h2>
+<p>The front tie-up float is approximately 75 feet long with 6 feet of depth. There is a shallow spot at the extreme east end. Currents in the Piscataqua are swift and there is heavy river traffic with resulting wakes; boats that tie up should use long spring lines and plenty of fenders. Tie-up is limited to pick up, drop off and provisioning; for an emergency or extended use, call the House Chair. Dinghy docks are inboard of the float. The typical tidal range is 9 to 11 feet, and the ramp to the float can be steep at low tide.</p>
+
+<h2 id="dinghies">Dinghy, kayak and paddle board storage</h2>
+<p>Members may keep a dinghy on the inside floats for a seasonal fee. Spaces are first come, first served and are not assigned. Maximum dinghy size is 12 feet LOA. Dinghy and rack storage stickers are issued by the Treasurer.</p>
+<p>Kayaks and paddle boards can be stored on the dinghy racks in the sections available, three per section, from late June until the end of August, when they must be removed so the sailing school boats can be stored for the winter. Every boat must be clearly marked with the member's name, and nothing may be stored on top of the racks. The last published rack fee was $100 per kayak or board per season; confirm with the House Chair.</p>
+
+<h2 id="moorings">River moorings</h2>
+<p>The Club owns four river moorings in front of the clubhouse. They are rented to members seasonally, and there is a waiting list. Any member renting a Club mooring must show that they are on a state or town mooring list somewhere in the area; Club moorings are not a permanent mooring solution. Contact the Dock Master, Doug Pinciaro (<a href="mailto:dpinciaro@comcast.net">dpinciaro@comcast.net</a>, 603-475-2828). The launch monitors VHF channel 68 during operating hours.</p>
+<p>By Board policy (1989), a $10 per night guest fee applies when a Club mooring is used by a guest; it covers launch service and use of the club and goes to the Club. The Club asks the mooring's renter for permission before assigning it to a guest.</p>
+
+<h2 id="shoals">Isles of Shoals moorings</h2>
+<p>The Club maintains three moorings in Gosport Harbor at the Isles of Shoals for two-day use on a first come, first served basis. Visiting boats are welcome to use them if available; the launch and steward are not involved with these moorings. Please check the pennant and hardware before use and limit rafting numbers in challenging conditions. The moorings as last reported by the Dock Master: NH 4641 (2,000 lb block), NH 4006 (3,000 lb block) and ME 911 (4,000 lb block).</p>
+
+<h2 id="workdays">Docks In and Docks Out</h2>
+<p>The floats go in each spring and come out each fall on member work days from 8:00 AM to noon, with coffee and lunch provided. All members are asked to help and to remove their dinghies before Docks Out. Docks Out 2026 is Saturday, October 17.</p>
+"""
+
+SCHOOL = """
+<div class="photos">
+  <div><img src="assets/school_photo_2_optis.jpg" alt="Optimists racing"></div>
+  <div><img src="assets/school_photo_3_fleet.jpg" alt="Sailing school fleet"></div>
+</div>
+<p>The Kittery Point Yacht Club Sailing School has been teaching students the art and science of sailing for over 30 years. It is the Seacoast's only public sailing school and youth racing program, taught by US Sailing certified instructors on the quiet waters of the Back Channel. No matter your experience level, you will leave the school with a better understanding of sailing.</p>
+<div class="info">Enrollment for the 2027 season, session dates and fees will be announced here and by email. For information contact the Sailing School Director, Kevin McCoole (<a href="mailto:kevinmccoole@rocketmail.com">kevinmccoole@rocketmail.com</a>, 207-703-4691).</div>
+
+<h2 id="programs">Programs</h2>
+<p>All programs run Monday through Thursday for two weeks; Fridays are reserved for make-up days lost to weather. Minimum age is 8. Parents are welcome at the orientation meeting during the first half hour of the first day of each session. Classes are held as scheduled regardless of weather and holidays unless notified by email.</p>
+<h3>Beginner, mornings</h3>
+<p>For sailors ages eight and older who are ready to learn and practice fundamental sailing skills while gaining confidence skippering 420s and Optimists. Sailors generally spend two to three years in the Beginner program before advancing. Students sail one to three per boat depending on skill. The goal is for each sailor to control the tiller and sail simultaneously and handle the boat independently. The curriculum covers nomenclature, knot tying, rigging, boat handling, wind direction, water safety and boat maintenance.</p>
+<h3>Intermediate, afternoons</h3>
+<p>A framework for racing practice, aimed at young people who have completed the Beginner course and are competent sailors. One-design racing in Optimists and 420s with a good deal of fun and friendly competition; young racers are encouraged to attend local events.</p>
+<h3>Adult lessons, evenings</h3>
+<p>For adults wanting to learn to sail, with a curriculum that parallels the Beginner course, one to three students per boat.</p>
+
+<h2 id="know">Things students and parents need to know</h2>
+<p><strong>Safety.</strong> All students take a swim test on the first day of each session. Life jackets are worn and fastened at all times on the water and on the docks. All instructors are US Sailing certified with basic first aid and CPR training. On-the-water activity is postponed for sudden weather changes, high winds or lightning. Bring sun protection.</p>
+<p><strong>What to bring.</strong> A Coast Guard approved Type III (vest style) life jacket; sneakers or closed-toe boat shoes (no flip-flops or open sandals); appropriate clothing including a change of clothes, jacket, hat, sunglasses, sun block and towel; a snack and water bottle (no glass). Label personal items and leave valuables at home.</p>
+<p><strong>Weather.</strong> Classes are held in inclement weather; on-the-water instruction may take place in the rain, and land-based instruction replaces it in severe weather.</p>
+<p><strong>Clubhouse.</strong> Please arrive on time and pick up promptly. Students wait for class on the clubhouse porch or the grass near the boat racks, and may not pass through the gate to the dock ramp without an instructor. Bags may be stored inside on the sailing school table during class. Youth students are accompanied by an instructor while in the clubhouse. Sailing school students may park along the left-hand property line in summer.</p>
+
+<h2 id="scholarship">Thomas Tarbell Memorial Scholarship</h2>
+<p>The Sailing School offers scholarships through the Thomas Tarbell Memorial Scholarship Fund, providing free lessons for children in need. For information contact the Sailing School Director.</p>
+"""
+
+SOCIAL = """
+<h2 id="social">The social season</h2>
+<div class="photos">
+  <div><img src="assets/racing_66.jpg" alt="Racing off the club"></div>
+  <div><img src="assets/racing_08.jpg" alt="Club racing"></div>
+</div>
+<p>Every Friday night in season is Pub Night on the deck. Around it the Social and Race Committees run a summer of events. Members may always bring guests; there is no dress code. Most events ask a modest contribution that covers dinner and refreshments, and some are potluck. Recent seasons have included:</p>
+<ul>
+  <li>Docks In and Docks Out work days, spring and fall</li>
+  <li>Club barbecue and pig roast with live music</li>
+  <li>Reggae night on the deck, followed by fireworks</li>
+  <li>Ron Gibbons Memorial Regatta</li>
+  <li>Fish fry with live music</li>
+  <li>Edmund Tarbell Regatta, surf and turf with live music</li>
+  <li>Lobsterman's bake (members only)</li>
+  <li>Single Handed Regatta and Lobster Double Handed Regatta</li>
+  <li>Oktoberfest pub night, launch driver appreciation night, and the anniversary potluck (the club marked its 70th in September 2026)</li>
+</ul>
+<p>The current calendar is emailed to members and posted on the clubhouse bulletin board. Contact the Social Chair, Alison Magill (<a href="mailto:alimagill@gmail.com">alimagill@gmail.com</a>), for events, and the Rear Commodore, Sally Elshout (<a href="mailto:sallyelshout@yahoo.com">sallyelshout@yahoo.com</a>), for racing and regattas.</p>
+
+<h2 id="racing">Racing</h2>
+<p>Club racing takes place on Tuesday and Thursday evenings through the season, with regattas on selected weekends. Racers and members are asked to carpool on race nights, since parking is limited. Notices of race, sailing instructions and results are distributed by the Race Committee.</p>
+
+<h2 id="education">Education program</h2>
+<p>The Fleet Captain, Adam Shapiro (<a href="mailto:adamhshapiro@gmail.com">adamhshapiro@gmail.com</a>), organizes education events for members based on member interest. Past seasons have offered, with partners including Maine Maritime, Boatwise and New England Ropes:</p>
+<ul>
+  <li>Survival at sea tactics and survival equipment seminars</li>
+  <li>Marine electronics, basic navigation and advanced navigation classes</li>
+  <li>USCG launch operator and USCG Master (captain's) courses</li>
+  <li>NASBLA safe boating certification</li>
+  <li>Marine ropes seminar, anchoring workshop, and first aid, CPR and AED certification</li>
+</ul>
+<p>Upcoming classes are announced by email with registration deadlines and costs.</p>
+"""
+
+DOCUMENTS = """
+<h2 id="downloads">Downloads</h2>
+<div class="tiles">
+  <a class="tile" href="docs/KPYC_ByLaws_January_2024.pdf"><div class="t">Constitution and By-Laws</div><div class="d">Revised January 2024 (PDF)</div></a>
+  <a class="tile" href="docs/KPYC_Membership_Application_2026.pdf"><div class="t">Membership Application</div><div class="d">Printable form with sponsor testimonials (PDF)</div></a>
+  <a class="tile" href="docs/KPYC_Membership_Application_2004_original.pdf"><div class="t">Original Membership Application (2004)</div><div class="d">Archived copy of the earlier printed form (PDF)</div></a>
+</div>
+
+<h2 id="pages">Club rules and guides on this site</h2>
+<div class="tiles">
+  <a class="tile" href="new-members.html"><div class="t">New Member Reference Guide</div><div class="d">Getting around the club</div></a>
+  <a class="tile" href="launch.html#rules"><div class="t">Launch Rules and Etiquette</div><div class="d">Hours, capacity, conduct</div></a>
+  <a class="tile" href="clubhouse.html#rules"><div class="t">Clubhouse Rules</div><div class="d">Eighteen house rules</div></a>
+  <a class="tile" href="clubhouse.html#rentals"><div class="t">Rental Policy and Rules</div><div class="d">Off-season member rentals</div></a>
+  <a class="tile" href="docks-moorings.html"><div class="t">Docks and Moorings</div><div class="d">Float, dinghies, river and Shoals moorings</div></a>
+  <a class="tile" href="membership.html"><div class="t">Membership</div><div class="d">How to join, dues, Share Value</div></a>
+</div>
+
+<h2 id="policies">Board of Directors' established policies</h2>
+<h3>House</h3>
+<p><strong>January 1990.</strong> Club members only may rent the club and that member must be present at the function. The checks for the rental and security deposit must be written and submitted by the club member, not the person they are sponsoring.</p>
+<p><strong>June 1990.</strong> An event that involves decorating the club and inviting people, as opposed to a more casual event, constitutes a "party" and is subject to the rental policy.</p>
+<p><strong>January 1992.</strong> No one (including construction-related parties) is to be in the club without a member present.</p>
+<h3>Moorings</h3>
+<p><strong>May 1989.</strong> The $10 guest fee per night for a guest mooring covers launch service, use of the club, propane and similar; the fee goes to the Club. The Club will ask renters of Club moorings for permission before assigning their mooring to a guest.</p>
+<h3>Launch</h3>
+<p><strong>June 1998.</strong> A "No Open Container" rule applies to all passengers of the club launch.</p>
+
+<h2 id="about">About this interim site</h2>
+<p>The club's website went offline in July 2026 and a replacement on a new platform is being built. In the meantime this site carries the club's essential information, drawn from the printed Welcome booklet given to new members and from archived copies of the previous website. Committee chairs are reviewing each section; if you spot something out of date, email the Webmaster, Jeff Reilly (<a href="mailto:jeffreilly@outlook.com">jeffreilly@outlook.com</a>).</p>
+"""
+
+HOME_TILES = """
+  <div class="card" id="club-info">
+    <div class="card-header">
+      <h1>Club Information</h1>
+      <div class="est">Rules, guides and how to join, while the full website is rebuilt</div>
+    </div>
+    <div class="card-body">
+      <div class="tiles">
+        <a class="tile" href="membership.html"><div class="t">Membership</div><div class="d">How to join, dues and Share Value, application form</div></a>
+        <a class="tile" href="new-members.html"><div class="t">New Member Guide</div><div class="d">Getting around the clubhouse and the club year</div></a>
+        <a class="tile" href="launch.html"><div class="t">Launch</div><div class="d">Hours, VHF 68, rules and etiquette</div></a>
+        <a class="tile" href="clubhouse.html"><div class="t">Clubhouse</div><div class="d">Facilities, house rules, off-season rentals</div></a>
+        <a class="tile" href="docks-moorings.html"><div class="t">Docks &amp; Moorings</div><div class="d">Float, dinghy and kayak storage, river and Shoals moorings</div></a>
+        <a class="tile" href="sailing-school.html"><div class="t">Sailing School</div><div class="d">Programs, what to bring, scholarship</div></a>
+        <a class="tile" href="social-education.html"><div class="t">Social &amp; Education</div><div class="d">The season's events, racing, member classes</div></a>
+        <a class="tile" href="documents.html"><div class="t">Documents</div><div class="d">By-Laws, application, board policies</div></a>
+      </div>
+    </div>
+  </div>
+"""
+
+
+def build_pages():
+    page("membership.html", "Membership", "How to join the Kittery Point Yacht Club", MEMBERSHIP,
+         [("join", "How to join"), ("dues", "Dues and Share"), ("application", "Application"), ("faq", "FAQ")])
+    page("new-members.html", "New Member Reference Guide", "Finding your way around the club", NEW_MEMBERS,
+         [("welcome", "Welcome"), ("structure", "Organization"), ("using", "Using the clubhouse"), ("season", "The club year")])
+    page("launch.html", "Launch Service", "Hours, channel 68, rules and etiquette", LAUNCH,
+         [("hours", "Hours"), ("rules", "Rules")])
+    page("clubhouse.html", "Clubhouse", "Facilities, house rules and off-season rentals", CLUBHOUSE,
+         [("facilities", "Facilities"), ("rules", "Clubhouse rules"), ("rentals", "Rentals")])
+    page("docks-moorings.html", "Docks &amp; Moorings", "Float, dinghies, river and Isles of Shoals moorings", DOCKS,
+         [("tieup", "Front float"), ("dinghies", "Dinghy and kayak storage"), ("moorings", "River moorings"), ("shoals", "Isles of Shoals"), ("workdays", "Docks In and Out")])
+    page("sailing-school.html", "KPYC Sailing School", "Teaching sailing on the Seacoast for over 30 years", SCHOOL,
+         [("programs", "Programs"), ("know", "Need to know"), ("scholarship", "Scholarship")])
+    page("social-education.html", "Social &amp; Education", "The season's events, racing and member classes", SOCIAL,
+         [("social", "Social season"), ("racing", "Racing"), ("education", "Education")])
+    page("documents.html", "Documents", "By-Laws, forms, rules and Board policies", DOCUMENTS,
+         [("downloads", "Downloads"), ("pages", "Rules and guides"), ("policies", "Board policies"), ("about", "About this site")])
+
+
+def update_index():
+    p = ROOT / "index.html"
+    s = p.read_text()
+    nav = nav_html("index.html")
+    if "<!-- nav:start -->" in s:
+        s = re.sub(r"<!-- nav:start -->.*?<!-- nav:end -->", f"<!-- nav:start -->{nav}<!-- nav:end -->", s, flags=re.S)
+    else:
+        s = s.replace("<body>\n", f"<body>\n<!-- nav:start -->{nav}<!-- nav:end -->\n", 1)
+    if 'id="club-info"' not in s:
+        s = s.replace('  <div class="card contacts-card" id="contacts">', HOME_TILES + '\n  <div class="card contacts-card" id="contacts">', 1)
+    # shared nav styles appended once
+    if ".nav-inner" not in s:
+        nav_css = "\n".join(l for l in CSS.splitlines() if l.strip().startswith((".nav", ".tiles", ".tile")))
+        nav_css += "\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: 8rem; }"
+        s = s.replace("  </style>", nav_css + "\n  </style>", 1)
+    p.write_text(s)
+    print("updated index.html")
+
+
+if __name__ == "__main__":
+    build_pages()
+    update_index()

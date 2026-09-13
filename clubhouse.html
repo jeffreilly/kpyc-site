@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clubhouse | Kittery Point Yacht Club</title>
+  <link rel="icon" href="assets/favicon.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 1.25rem 2rem; }
+    .nav { position: sticky; top: 0; z-index: 30; width: 100%; background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding: 0.55rem 0; }
+    .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; margin-right: 0.5rem; white-space: nowrap; }
+    .nav-brand img { height: 22px; width: auto; }
+    .nav-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.2rem; }
+    .nav-links a { color: #dbe6f5; font-size: 0.84rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.55rem; border-radius: 6px; display: inline-block; }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .nav-links a.active { background: #fff; color: #0d3b6e; }
+    .card { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.10); max-width: 860px; width: 100%; overflow: hidden; }
+    .card + .card { margin-top: 1.5rem; }
+    .card[id] { scroll-margin-top: 5rem; }
+    .card-header { background: linear-gradient(135deg, #0d3b6e 0%, #1a5fa8 100%); color: #fff; padding: 2rem 2rem 1.6rem; text-align: center; }
+    .card-header h1 { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
+    .card-header .est { font-size: 0.85rem; opacity: 0.7; letter-spacing: 0.04em; }
+    .card-header img.burgee { height: 54px; width: auto; margin-bottom: 0.6rem; }
+    .card-body { padding: 1.75rem 2rem 2rem; }
+    h2 { font-size: 1.15rem; font-weight: 700; color: #0d3b6e; margin: 1.4rem 0 0.5rem; }
+    h2:first-child { margin-top: 0; }
+    h3 { font-size: 0.98rem; font-weight: 700; color: #1a5fa8; margin: 1rem 0 0.35rem; }
+    p { font-size: 0.97rem; color: #444; margin-bottom: 0.9rem; }
+    ul, ol { margin: 0.2rem 0 0.9rem 1.4rem; color: #444; font-size: 0.95rem; }
+    li { margin-bottom: 0.3rem; }
+    a { color: #0d3b6e; }
+    table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 1rem; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #eceff3; vertical-align: top; }
+    th { color: #0d3b6e; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:last-child td { border-bottom: none; }
+    .rules-box { margin: 0.75rem 0 1.25rem; background: #fdf1f1; border: 1px solid #f3d4d4; border-radius: 10px; padding: 0.85rem 1rem; }
+    .rules-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #7a1f1f; margin-bottom: 0.45rem; }
+    .rules-box ul, .rules-box ol { margin-bottom: 0; color: #7a1f1f; }
+    .note { background: #fff8e1; border: 1px solid #f0d060; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.88rem; color: #6b5200; margin: 0.6rem 0 1.1rem; }
+    .info { background: #eef4fb; border: 1px solid #cfdff2; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.9rem; color: #1e3a5f; margin: 0.6rem 0 1.1rem; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 0.6rem; }
+    .tile { display: block; background: #f8f9fb; border: 1px solid #eceff3; border-radius: 10px; padding: 0.9rem 1rem; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
+    .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
+    .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
+    .btn { display: inline-block; background: #0d3b6e; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 8px; margin: 0.2rem 0.4rem 0.6rem 0; }
+    .btn.secondary { background: #e9eef6; color: #0d3b6e; }
+    .btn:hover { opacity: 0.92; }
+    .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 1rem; }
+    .photos img { width: 100%; height: auto; border-radius: 8px; border: 1px solid #e3e6ea; }
+    .photos .cap { font-size: 0.78rem; color: #777; margin-top: 0.2rem; }
+    .toc { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin: 0 0 1rem; }
+    .toc a { font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+    footer { text-align: center; font-size: 0.78rem; color: #aaa; margin-top: 2rem; }
+    @media (max-width: 600px) { .card-body { padding: 1.25rem 1.1rem 1.5rem; } .nav-links a { font-size: 0.8rem; padding: 0.25rem 0.45rem; } }
+</style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="membership.html">Membership</a></li><li><a href="new-members.html">New Members</a></li><li><a href="launch.html">Launch</a></li><li><a href="clubhouse.html" class="active">Clubhouse</a></li><li><a href="docks-moorings.html">Docks &amp; Moorings</a></li><li><a href="sailing-school.html">Sailing School</a></li><li><a href="social-education.html">Social &amp; Education</a></li><li><a href="documents.html">Documents</a></li></ul></div></nav>
+  <div class="card">
+    <div class="card-header">
+      <img class="burgee" src="assets/KPYC_burgee_wave.png" alt="KPYC burgee">
+      <h1>Clubhouse</h1>
+      <div class="est">Facilities, house rules and off-season rentals</div>
+    </div>
+    <div class="card-body">
+      <ul class="toc"><li><a href="#facilities">Facilities</a></li><li><a href="#rules">Clubhouse rules</a></li><li><a href="#rentals">Rentals</a></li></ul>
+      
+<h2 id="facilities">Facilities</h2>
+<div class="photos">
+  <div><img src="assets/clubhouse_front.jpg" alt="KPYC clubhouse"><div class="cap">The clubhouse at 328 Portsmouth Avenue, Goat Island</div></div>
+  <div><img src="assets/deck_view_river.jpg" alt="Deck view of the Piscataqua"><div class="cap">The deck and the Piscataqua River</div></div>
+</div>
+<p>Kittery Point Yacht Club is located in New Castle, NH, on the southern shore of the Piscataqua River. Its clubhouse, on Goat Island, stands opposite Seavey Island, home of the historic Portsmouth Naval Shipyard. Ships from all over the world pass before it, vying with local lobster and fishing boats during the week and hundreds of pleasure boats on holidays and weekends. The clubhouse has a wrap-around deck, a kitchen and bar, and one shower. It is not wheelchair accessible; there are two broad steps up to the deck. Per the occupancy permit, the limit is 70 persons in the club at any one time.</p>
+<p>A member of US Sailing, KPYC is well represented in local, regional and occasionally national events, with members racing and cruising a variety of boats. The club sponsors the KPYC Sailing School, the Seacoast's only public sailing school and youth racing program. Members are drawn mainly from New Hampshire and Maine, and most enjoy boating and organized social activities during the main season from May to October, with potluck dinners and casual gatherings through the year.</p>
+
+<h2 id="rules">Clubhouse rules</h2>
+<ol>
+  <li>The Clubhouse is for the exclusive use of members and invited guests.</li>
+  <li>There shall be no social activity conducted on club property east of the building.</li>
+  <li>No pets allowed on the premises except going to and from a boat. All pets must be on a leash. Members must clean up after their animals.</li>
+  <li>There shall be no borrowing or renting of Club property.</li>
+  <li>No child under 18 may be allowed the use of the Clubhouse unless accompanied by a member or parent responsible for his or her supervision.</li>
+  <li>Members shall be held responsible for any property damaged or lost by themselves or their guests.</li>
+  <li>Guests, other than visiting yachtsmen, must be accompanied by a member and that member shall be held responsible for the conduct of the guest while on the premises. Guests of members may be taken to a member's boat by the launch only when the member is already on board.</li>
+  <li>The last member to leave the Clubhouse is responsible for locking doors and windows, turning out lights, and turning down the heat.</li>
+  <li>The Clubhouse is available for member use and shall be left "shipshape" after each use, especially the bar and galley.</li>
+  <li>Application by a member for rental of the Club for a private event shall be made to the Social Committee on the form provided. The Club will not be rented from May 1 to October 15.</li>
+  <li>The member holding a private party at the Club shall be present at all times and shall be responsible for proper conduct of guests and all damage or loss to the Club. Out of respect for our tenant, noise levels are restricted to conversational tones after 10:00 PM, with no noise after 11:00 PM. Clean-up following rentals must begin no earlier than 8:00 AM on the day following the event and be completed no later than 10:00 AM.</li>
+  <li>Visiting yachtsmen from other yacht clubs may be allowed use of the club facilities during normal club hours (Steward or dock attendant on duty).</li>
+  <li>Tie-up on the dock is limited to pick up, drop off, and provisioning only. In case of an emergency, or if there is a need to use the dock for an extended period, call the House Committee Chair.</li>
+  <li>Only Club members and Sailing School students will be allowed to park on the premises on Tuesday nights. Guests are to park on the road or elsewhere. This policy is in effect from Docks In to Docks Out.</li>
+  <li>The Club facility will be locked when no members are present and when the Steward is not on the premises.</li>
+  <li>Sailing School students will be monitored by the instructors, who will enforce the house rules.</li>
+  <li>Neither profanity nor other offensive behavior will be tolerated; a member's suspension or expulsion could result.</li>
+  <li>There shall be no smoking in the Clubhouse.</li>
+</ol>
+
+<h2 id="rentals">Clubhouse rentals</h2>
+<p>Club members may rent the Club for private functions on a first come, first served basis after October 15 and before May 1. No rentals are permitted from May 1 through October 15. Any member who rents the Club must be present at the event, and the rental and deposit checks must be written by the member, not by someone they are sponsoring. Members must reserve the Club if they want exclusive use of the Clubhouse or plan to decorate it; an event that involves decorating and inviting people is a "party" under Board policy and is subject to the rental policy. The Club may not be used for commercial purposes.</p>
+<div class="note">The last published rental fee was $300 for members plus a refundable deposit check. Confirm the current fee, deposit and payment method with the House Chair, Dylan Kimmel (<a href="mailto:dkimmel@neintegration.com">dkimmel@neintegration.com</a>), or the Social Chair, Alison Magill, before booking. While the website is down, reservations are made by email to the House Chair rather than through the online form.</div>
+<h3>How to reserve</h3>
+<ol>
+  <li>Check the calendar on the clubhouse wall for your date, then email the House Chair with your name, phone, requested date, start and end times, and expected number of guests.</li>
+  <li>Sign the Release and Hold Harmless Agreement and agree to pay for any damage to the club.</li>
+  <li>Pay the rental fee and provide the deposit check. Once confirmed, your reservation is posted on the clubhouse calendar.</li>
+  <li>During the event, post a sign on the front door: "Private Member Event Underway". The club's beverage refrigerator is not available during rentals.</li>
+  <li>To cancel, notify the House Chair immediately; payments are refunded and the date is released.</li>
+</ol>
+<h3>Rental rules</h3>
+<p>Our cleaning person tries to schedule the weekly cleaning the day before your rental, but has no control over what happens between the cleaning and your arrival. Chairs and tables are behind the roll-out cabinet in the kitchen in a labeled stacking order; the one long table stays out in the rear right-hand corner. If your function runs into the evening, light the parking lot from the four floodlight switches on the kitchen wall. Noise is restricted to conversational tones after 10:00 PM and there is to be no noise after 11:00 PM.</p>
+<p>It is your responsibility to leave the Clubhouse shipshape. All rentals must, at the end of the function:</p>
+<ul>
+  <li>Wet mop (warm water only) the kitchen, bathrooms and hardwood floors, and vacuum the carpets.</li>
+  <li>Clean bathroom toilets and sinks.</li>
+  <li>Wash, dry and put away any pots, pans, dishes or utensils used; wipe down the bar and kitchen counters.</li>
+  <li>Take out all trash (kitchen and bathrooms) and replace with clean bags; bag recyclable cans beside the dumpster.</li>
+  <li>Check that all doors and windows are locked, no burners or oven elements are on, lights are out including the floodlights, and the heat is turned down.</li>
+</ul>
+<p>If clean-up is deferred to the following day, it must start no earlier than 8:00 AM and finish by 10:00 AM. If additional cleaning is needed, the deposit may be used to pay for it.</p>
+
+    </div>
+  </div>
+  <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854 &middot; (603) 436-9303<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
+</body>
+</html>
