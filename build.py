@@ -158,9 +158,9 @@ MEMBERSHIP = """
 
 <h2 id="application">Application form</h2>
 <p>Print the application, complete it with your two sponsors, and mail it with your first year's dues to the Treasurer. Questions about the process go to the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348).</p>
-<a class="btn" href="docs/KPYC_Membership_Application_2026.pdf">Download the Membership Application (PDF)</a>
+<a class="btn" href="docs/KPYC_Membership_Application.pdf">Download the Membership Application (PDF)</a>
 <a class="btn secondary" href="docs/KPYC_ByLaws_January_2024.pdf">KPYC Constitution and By-Laws (PDF)</a>
-<p style="font-size:0.85rem;color:#777;">The application mirrors the online form used on the club's previous website, with the sponsor testimonial section restored from the original printed form. An online form will return with the new website.</p>
+<p style="font-size:0.85rem;color:#777;">The three-page application includes the sponsor testimonial page and the application procedures with the first-year dues schedule. An online form will return with the new website.</p>
 
 <h2 id="faq">Frequently asked questions</h2>
 <h3>How do I get a clubhouse key?</h3>
@@ -398,9 +398,9 @@ DOCUMENTS = """
 <h2 id="downloads">Downloads</h2>
 <div class="tiles">
   <a class="tile" href="docs/KPYC_ByLaws_January_2024.pdf"><div class="t">Constitution and By-Laws</div><div class="d">Revised January 2024 (PDF)</div></a>
-  <a class="tile" href="docs/KPYC_Membership_Application_2026.pdf"><div class="t">Membership Application</div><div class="d">Printable form with sponsor testimonials (PDF)</div></a>
-  <a class="tile" href="docs/KPYC_Membership_Application_2004_original.pdf"><div class="t">Original Membership Application (2004)</div><div class="d">Archived copy of the earlier printed form (PDF)</div></a>
+  <a class="tile" href="docs/KPYC_Membership_Application.pdf"><div class="t">Membership Application</div><div class="d">Official form with sponsor testimonials and procedures (PDF)</div></a>
 </div>
+<p style="font-size:0.85rem;color:#777;">Also available for reference: a <a href="docs/KPYC_Membership_Application_2026.pdf">proposed 2026 redesign of the application</a> under review by the Membership Committee, and the <a href="docs/KPYC_Membership_Application_2004_original.pdf">2004 printed form</a> from the club archive.</p>
 
 <h2 id="pages">Club rules and guides on this site</h2>
 <div class="tiles">
