@@ -127,26 +127,32 @@ def page(filename, title, subtitle, body, toc=None):
 
 MEMBERSHIP = """
 <h2 id="join">How to join</h2>
-<p>Membership in the Kittery Point Yacht Club is open to individuals who enjoy boating and want to be part of an active, volunteer-run club. Joining is a two-step process set out in the club By-Laws.</p>
+<p>Membership in the Kittery Point Yacht Club is open to individuals with an active interest in boating who want to be part of a volunteer-run club. The Club is at its By-Laws limit of 200 Regular Members, so approved applicants are placed on an ordered waiting list and move up as Regular Members resign, in the order their completed applications were received.</p>
+<h3>Membership application procedures</h3>
 <ol>
-  <li><strong>Apply.</strong> Complete the membership application, including testimonials from two sponsors. Sponsors must be current members with at least six months of membership and may not be from the same household. Mail the application to the Treasurer with your first year's dues (see the schedule below).</li>
-  <li><strong>Board vote.</strong> Applications are reviewed and voted on at the next monthly Board of Directors meeting. Approved applicants immediately become Probationary Members with all the privileges of regular members, and the Treasurer will contact you with the Board's decision. Probationary status ends automatically at the following Board meeting unless a hold is placed under the By-Laws.</li>
-  <li><strong>Purchase your Share.</strong> KPYC is an equity club. Each membership purchases one Share of stock representing a partial ownership in the club's net assets. The Share Value is set annually by the membership and is refundable when you resign, less any outstanding balances; the By-Laws provide that refunds are paid as new members join, so there can be a short waiting list.</li>
+  <li>Complete the application and pay the non-refundable $250 application fee.</li>
+  <li>You will receive a confirmation, and each of your two sponsors will be asked to submit a confidential recommendation. Sponsors must be Regular Members in good standing for six or more months and not from the same household as the applicant. It is the applicant's responsibility to make sure both recommendations are submitted promptly; the application is not complete until both are received, and the date of the second recommendation sets your place on the waiting list.</li>
+  <li>Once both sponsor recommendations are received, the Membership Committee presents your complete application to the Board of Directors at the next monthly meeting for consideration, including review of any membership openings due to resignations. The Board vote (four affirmative votes required) determines approval onto the waiting list.</li>
+  <li>If approved, you are added to the official waiting list in the order your completed application was received.</li>
+  <li>When an opening occurs and you reach the top of the list, the Treasurer contacts you with payment instructions. You then become a Probationary Member for one month, with all the privileges of Regular Members except eligibility to serve on the Board, and are invoiced for annual dues prorated monthly from your activation month through December 31. Payment is due immediately to begin the probationary period.</li>
+  <li>At the end of the one-month probationary period you purchase one Share of KPYC stock for $510, full payment required. On receipt of payment you become a full Regular Member.</li>
 </ol>
-<p>Spouses and children under 18 in the member's household are covered by the one Share, with one vote per Share. Membership is limited to 200 regular memberships, so a waiting list is maintained in the order applications are received.</p>
+<p><strong>KPYC is a 100 percent volunteer-run club.</strong> Our exceptionally low dues are possible only because every member contributes time and talent. We strongly encourage Probationary Members to use their first 30 days to review the By-Laws, meet the committee chairs, and choose at least one committee where they can actively volunteer. This is a core part of our culture and what makes KPYC special.</p>
+<p>Spouses and children under 18 in the member's household are covered by the one Share, with one vote per Share.</p>
 
-<h2 id="dues">Dues and Share Value</h2>
+<h2 id="dues">Fees, dues and Share Value</h2>
 <table>
   <thead><tr><th>Item</th><th>Amount (2026)</th></tr></thead>
   <tbody>
-    <tr><td>Annual dues (regular membership)</td><td>$500</td></tr>
-    <tr><td>Share Value (one-time, refundable on resignation)</td><td>$510</td></tr>
+    <tr><td>Application fee (paid with the application; non-refundable, even if you later withdraw)</td><td>$250</td></tr>
+    <tr><td>Annual dues (regular membership; prorated by month in your first year)</td><td>$500</td></tr>
+    <tr><td>Share Value (one-time, after the probationary month; refundable on resignation once a new member takes your place)</td><td>$510</td></tr>
   </tbody>
 </table>
-<p>First-year dues for new members are prorated according to the month in which the Board considers the application, on the schedule in the By-Laws. Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee. Checks are payable to Kittery Point Yacht Club.</p>
+<p>Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee. Checks are payable to Kittery Point Yacht Club.</p>
 
 <h2 id="application">Application form</h2>
-<div class="info">The membership application and procedures are being updated and will be posted here once the Membership Committee has reviewed them. In the meantime, please contact the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348), who will send you the current application and walk you through the process.</div>
+<div class="info">The online application and sponsor recommendation forms were part of the website that went offline in July 2026 and will return with the new club website. Until then, please contact the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348), who will send you the application, arrange the sponsor recommendations, and explain how to pay the application fee. Questions can also go to <a href="mailto:membership@kpyc.org">membership@kpyc.org</a>.</div>
 <a class="btn secondary" href="docs/KPYC_ByLaws_January_2024.pdf">KPYC Constitution and By-Laws (PDF)</a>
 
 <h2 id="faq">Frequently asked questions</h2>
