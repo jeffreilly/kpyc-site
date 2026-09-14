@@ -167,7 +167,7 @@ MEMBERSHIP = """
 <h3>How do I get a clubhouse key?</h3>
 <p>You receive a key automatically once accepted as a member. For an extra key, contact the Treasurer.</p>
 <h3>How do I get a burgee or club gear?</h3>
-<p>KPYC burgees, shirts and other items are sold at the clubhouse. Contact the Quartermaster, Adam Shapiro (<a href="mailto:adamhshapiro@gmail.com">adamhshapiro@gmail.com</a>).</p>
+<p>Every new member receives their first burgee free when they join. Additional burgees, shirts and other club gear are available from the Quartermaster, Adam Shapiro (<a href="mailto:adamhshapiro@gmail.com">adamhshapiro@gmail.com</a>).</p>
 <h3>How do I rent the clubhouse for a private event?</h3>
 <p>See the <a href="clubhouse.html#rentals">Clubhouse Rentals</a> section. Rentals are for members only, in the off-season.</p>
 <h3>When are the membership meetings?</h3>
@@ -220,7 +220,7 @@ NEW_MEMBERS = """
 <p><strong>Social functions.</strong> The Social Committee runs events through the season; see <a href="social-education.html">Social &amp; Education</a>. Members may always bring guests. There is no dress code.</p>
 <p><strong>Launch, docks and moorings.</strong> See the <a href="launch.html">Launch</a> and <a href="docks-moorings.html">Docks &amp; Moorings</a> pages.</p>
 <p><strong>Sailing School.</strong> The club operates the KPYC Sailing School for kids and adults; see <a href="sailing-school.html">Sailing School</a>.</p>
-<p><strong>Club gear.</strong> Clothing and other items with the KPYC burgee are available from the Quartermaster, Adam Shapiro.</p>
+<p><strong>Club gear.</strong> Your first burgee is free, with the compliments of the Club. Additional burgees, clothing and other items with the KPYC burgee are available from the Quartermaster, Adam Shapiro.</p>
 """
 
 LAUNCH = """
