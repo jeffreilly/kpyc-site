@@ -136,31 +136,18 @@ MEMBERSHIP = """
 <p>Spouses and children under 18 in the member's household are covered by the one Share, with one vote per Share. Membership is limited to 200 regular memberships, so a waiting list is maintained in the order applications are received.</p>
 
 <h2 id="dues">Dues and Share Value</h2>
-<div class="note">Amounts below are as last published by the club (2025). Confirm current figures with the Treasurer, Michael Millikan, before sending payment.</div>
 <table>
-  <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+  <thead><tr><th>Item</th><th>Amount (2026)</th></tr></thead>
   <tbody>
-    <tr><td>Annual dues (regular membership)</td><td>$400</td></tr>
-    <tr><td>Share Value (one-time, refundable on resignation)</td><td>$450, with two- or three-month payment plans available</td></tr>
+    <tr><td>Annual dues (regular membership)</td><td>$500</td></tr>
+    <tr><td>Share Value (one-time, refundable on resignation)</td><td>$510</td></tr>
   </tbody>
 </table>
-<h3>First year's dues are prorated by the month your application is voted on</h3>
-<table>
-  <thead><tr><th>Board meeting month</th><th>First year's dues</th></tr></thead>
-  <tbody>
-    <tr><td>January through July</td><td>$400 (100%)</td></tr>
-    <tr><td>August</td><td>$300 (75%)</td></tr>
-    <tr><td>September and October</td><td>$200 (50%)</td></tr>
-    <tr><td>November and December</td><td>$100 (25%)</td></tr>
-  </tbody>
-</table>
-<p>Checks are payable to Kittery Point Yacht Club and mailed to: Kittery Point Yacht Club, Treasurer, PO Box 373, New Castle, NH 03854-0373. Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee.</p>
+<p>First-year dues for new members are prorated according to the month in which the Board considers the application, on the schedule in the By-Laws. Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee. Checks are payable to Kittery Point Yacht Club.</p>
 
 <h2 id="application">Application form</h2>
-<p>Print the application, complete it with your two sponsors, and mail it with your first year's dues to the Treasurer. Questions about the process go to the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348).</p>
-<a class="btn" href="docs/KPYC_Membership_Application.pdf">Download the Membership Application (PDF)</a>
+<div class="info">The membership application and procedures are being updated and will be posted here once the Membership Committee has reviewed them. In the meantime, please contact the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348), who will send you the current application and walk you through the process.</div>
 <a class="btn secondary" href="docs/KPYC_ByLaws_January_2024.pdf">KPYC Constitution and By-Laws (PDF)</a>
-<p style="font-size:0.85rem;color:#777;">The three-page application includes the sponsor testimonial page and the application procedures with the first-year dues schedule. An online form will return with the new website.</p>
 
 <h2 id="faq">Frequently asked questions</h2>
 <h3>How do I get a clubhouse key?</h3>
@@ -398,9 +385,8 @@ DOCUMENTS = """
 <h2 id="downloads">Downloads</h2>
 <div class="tiles">
   <a class="tile" href="docs/KPYC_ByLaws_January_2024.pdf"><div class="t">Constitution and By-Laws</div><div class="d">Revised January 2024 (PDF)</div></a>
-  <a class="tile" href="docs/KPYC_Membership_Application.pdf"><div class="t">Membership Application</div><div class="d">Official form with sponsor testimonials and procedures (PDF)</div></a>
+  <a class="tile" href="membership.html#application"><div class="t">Membership Application</div><div class="d">Being updated; contact the Membership Chair</div></a>
 </div>
-<p style="font-size:0.85rem;color:#777;">Also available for reference: a <a href="docs/KPYC_Membership_Application_2026.pdf">proposed 2026 redesign of the application</a> under review by the Membership Committee, and the <a href="docs/KPYC_Membership_Application_2004_original.pdf">2004 printed form</a> from the club archive.</p>
 
 <h2 id="pages">Club rules and guides on this site</h2>
 <div class="tiles">
