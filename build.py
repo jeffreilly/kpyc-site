@@ -152,7 +152,15 @@ MEMBERSHIP = """
 <p>Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee. Checks are payable to Kittery Point Yacht Club.</p>
 
 <h2 id="application">Application form</h2>
-<div class="info">The online application and sponsor recommendation forms were part of the website that went offline in July 2026 and will return with the new club website. Until then, please contact the Membership Chair, Chris Snow (<a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a>, 603-731-3348), who will send you the application, arrange the sponsor recommendations, and explain how to pay the application fee. Questions can also go to <a href="mailto:membership@kpyc.org">membership@kpyc.org</a>.</div>
+<p>The application is a four-page PDF: the procedures, the application itself, and one Sponsor Recommendation page for each of your two sponsors.</p>
+<a class="btn" href="docs/KPYC_Membership_Application_2026.pdf">Download the Membership Application (PDF)</a>
+<h3>How to submit while the online form is offline</h3>
+<ol>
+  <li>Print and complete page 2, sign it, and send it with your $250 check (payable to Kittery Point Yacht Club) to the Membership Chair: Chris Snow, Kittery Point Yacht Club, PO Box 373, New Castle, NH 03854-0373. You may email a scan of the application to <a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a> and mail the check separately.</li>
+  <li>Give each of your two sponsors a copy of a Sponsor Recommendation page (pages 3 and 4). Each sponsor sends their completed page directly to the Membership Chair by mail or email, not back to you, so recommendations stay confidential.</li>
+  <li>Your application is complete when all three items have arrived. The date the last item is received is your date of record for the waiting list, and the Membership Chair will confirm by email.</li>
+</ol>
+<div class="info">The online application and sponsor forms will return with the new club website. Questions: Chris Snow, 603-731-3348, or <a href="mailto:membership@kpyc.org">membership@kpyc.org</a>.</div>
 <a class="btn secondary" href="docs/KPYC_ByLaws_January_2024.pdf">KPYC Constitution and By-Laws (PDF)</a>
 
 <h2 id="faq">Frequently asked questions</h2>
@@ -201,7 +209,7 @@ NEW_MEMBERS = """
 <p>In the evening, please light the parking lot after dark. On the kitchen wall to the right of the telephone are four switches labeled North, South, East and West floodlight zones: South lights the front parking area, East the right-hand side of the clubhouse, and North and West the exterior deck. If you are the last to leave, shut off all lights.</p>
 
 <h3>Fireplace</h3>
-<p>The fireplace can be smoky, especially on windy days. Place a large log at the extreme front of the grate and build your fire behind it as a smoke deflector. Follow the damper instructions printed on the chain at the front left of the fireplace. Light a newspaper bundle and hold it up the chimney to start a draft, then light your fire. Firewood is outdoors along the left property line fence. When you leave, leave the damper open and do not dispose of the ashes.</p>
+<p>The fireplace has been converted to gas. Follow the lighting and shut-off instructions posted at the fireplace, and make sure it is fully off before you leave. Do not bring in or burn wood.</p>
 
 <h3>Last to leave</h3>
 <p>If you are the last member to leave, check that all doors and windows are locked, all stove burners and oven elements are off, all interior and exterior lights (including floodlights) are off, and the heat is turned down to 55 &deg;F.</p>
@@ -391,7 +399,7 @@ DOCUMENTS = """
 <h2 id="downloads">Downloads</h2>
 <div class="tiles">
   <a class="tile" href="docs/KPYC_ByLaws_January_2024.pdf"><div class="t">Constitution and By-Laws</div><div class="d">Revised January 2024 (PDF)</div></a>
-  <a class="tile" href="membership.html#application"><div class="t">Membership Application</div><div class="d">Being updated; contact the Membership Chair</div></a>
+  <a class="tile" href="docs/KPYC_Membership_Application_2026.pdf"><div class="t">Membership Application</div><div class="d">Procedures, application, and sponsor recommendation pages (PDF)</div></a>
 </div>
 
 <h2 id="pages">Club rules and guides on this site</h2>
