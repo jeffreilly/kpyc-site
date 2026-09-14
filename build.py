@@ -322,7 +322,7 @@ DOCKS = """
 <table>
   <thead><tr><th>Storage</th><th>Season fee (2026)</th><th>Notes</th></tr></thead>
   <tbody>
-    <tr><td>Dinghy on the inside floats</td><td>$175</td><td>Sign up in the first quarter (January to March). Space is limited to about 40 dinghies. Maximum 12 feet LOA. Spaces are first come, first served and not assigned.</td></tr>
+    <tr><td>Dinghy on the inside floats</td><td>$175</td><td>Sign up in the first quarter (January to March). Space is limited to about 40 dinghies. Maximum 12 feet LOA. Hard-sided dinghies are not permitted. Spaces are first come, first served and not assigned.</td></tr>
     <tr><td>Kayak or paddle board on the racks at the club's new property</td><td>$150 each</td><td>Racks hold three per section. Nothing may be stored on top of the racks.</td></tr>
     <tr><td>Locker</td><td>$50</td><td>Subject to availability.</td></tr>
   </tbody>
