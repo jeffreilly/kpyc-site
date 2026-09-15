@@ -261,7 +261,8 @@
     .contact-info a:hover {
       text-decoration: underline;
     }
-    .nav { position: sticky; top: 0; z-index: 30; width: 100%; background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+    /* nav-css:start */
+    .nav { position: sticky; top: 0; z-index: 30; width: calc(100% + 2.5rem); background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
     .nav-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding: 0.55rem 0; }
     .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; margin-right: 0.5rem; white-space: nowrap; }
     .nav-brand img { height: 22px; width: auto; }
@@ -274,10 +275,21 @@
     .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
     .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
     .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
+    @media (max-width: 700px) {
+      .nav-inner { flex-wrap: nowrap; gap: 0.5rem; padding: 0.45rem 0; }
+      .nav-brand { margin-right: 0; }
+      .nav-links { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex: 1; min-width: 0; mask-image: linear-gradient(to right, #000 92%, transparent); -webkit-mask-image: linear-gradient(to right, #000 92%, transparent); }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { white-space: nowrap; font-size: 0.86rem; padding: 0.35rem 0.6rem; }
+      .tiles { grid-template-columns: 1fr; }
+    }
+    /* nav-css:end */
     body { padding-top: 0; justify-content: flex-start; }
     .nav { margin-top: 0; }
     .toc-card { top: 3.4rem; }
     .card[id] { scroll-margin-top: 8rem; }
+    @media (max-width: 700px) { .toc-card { position: static; } .card[id] { scroll-margin-top: 4rem; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }
+
   </style>
 </head>
 <body>
@@ -485,5 +497,6 @@
   <footer>
     &copy; 2026 Kittery Point Yacht Club &nbsp;&middot;&nbsp; kpyc.org
   </footer>
+<script>document.addEventListener('DOMContentLoaded',function(){var a=document.querySelector('.nav-links a.active');if(a&&window.innerWidth<=700){var l=a.closest('.nav-links');l.scrollLeft=Math.max(0,a.offsetLeft-l.clientWidth/2+a.offsetWidth/2);}});</script>
 </body>
 </html>

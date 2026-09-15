@@ -23,11 +23,9 @@ NAV = [
     ("documents.html", "Documents"),
 ]
 
-CSS = """
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 1.25rem 2rem; }
-    .nav { position: sticky; top: 0; z-index: 30; width: 100%; background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+NAV_CSS = """
+    /* nav-css:start */
+    .nav { position: sticky; top: 0; z-index: 30; width: calc(100% + 2.5rem); background: #0d3b6e; color: #fff; margin: 0 -1.25rem 1.5rem; padding: 0 1.25rem; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
     .nav-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding: 0.55rem 0; }
     .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: #fff; text-decoration: none; margin-right: 0.5rem; white-space: nowrap; }
     .nav-brand img { height: 22px; width: auto; }
@@ -35,6 +33,28 @@ CSS = """
     .nav-links a { color: #dbe6f5; font-size: 0.84rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.55rem; border-radius: 6px; display: inline-block; }
     .nav-links a:hover { background: rgba(255,255,255,0.12); color: #fff; }
     .nav-links a.active { background: #fff; color: #0d3b6e; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 0.6rem; }
+    .tile { display: block; background: #f8f9fb; border: 1px solid #eceff3; border-radius: 10px; padding: 0.9rem 1rem; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
+    .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
+    .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
+    @media (max-width: 700px) {
+      .nav-inner { flex-wrap: nowrap; gap: 0.5rem; padding: 0.45rem 0; }
+      .nav-brand { margin-right: 0; }
+      .nav-links { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex: 1; min-width: 0; mask-image: linear-gradient(to right, #000 92%, transparent); -webkit-mask-image: linear-gradient(to right, #000 92%, transparent); }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { white-space: nowrap; font-size: 0.86rem; padding: 0.35rem 0.6rem; }
+      .tiles { grid-template-columns: 1fr; }
+    }
+    /* nav-css:end */
+"""
+
+NAV_SCRIPT = """<script>document.addEventListener('DOMContentLoaded',function(){var a=document.querySelector('.nav-links a.active');if(a&&window.innerWidth<=700){var l=a.closest('.nav-links');var r=a.getBoundingClientRect(),lr=l.getBoundingClientRect();l.scrollLeft=Math.max(0,(r.left-lr.left)+l.scrollLeft-lr.width/2+r.width/2);}});</script>"""
+
+CSS = """
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 1.25rem 2rem; }
     .card { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.10); max-width: 860px; width: 100%; overflow: hidden; }
     .card + .card { margin-top: 1.5rem; }
     .card[id] { scroll-margin-top: 5rem; }
@@ -54,16 +74,20 @@ CSS = """
     th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #eceff3; vertical-align: top; }
     th { color: #0d3b6e; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
     tr:last-child td { border-bottom: none; }
+    @media (max-width: 600px) {
+      table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+      table.stack thead { display: none; }
+      table.stack tr { border: 1px solid #eceff3; border-radius: 8px; padding: 0.5rem 0.75rem; margin-bottom: 0.6rem; background: #f8f9fb; }
+      table.stack td { border: none; padding: 0.15rem 0; }
+      table.stack td::before { content: attr(data-label); display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: #0d3b6e; font-weight: 700; margin-top: 0.3rem; }
+      table.stack td:first-child::before { margin-top: 0; }
+      table.stack td:first-child { font-weight: 700; color: #0d3b6e; }
+    }
     .rules-box { margin: 0.75rem 0 1.25rem; background: #fdf1f1; border: 1px solid #f3d4d4; border-radius: 10px; padding: 0.85rem 1rem; }
     .rules-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #7a1f1f; margin-bottom: 0.45rem; }
     .rules-box ul, .rules-box ol { margin-bottom: 0; color: #7a1f1f; }
     .note { background: #fff8e1; border: 1px solid #f0d060; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.88rem; color: #6b5200; margin: 0.6rem 0 1.1rem; }
     .info { background: #eef4fb; border: 1px solid #cfdff2; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.9rem; color: #1e3a5f; margin: 0.6rem 0 1.1rem; }
-    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin: 0.4rem 0 0.6rem; }
-    .tile { display: block; background: #f8f9fb; border: 1px solid #eceff3; border-radius: 10px; padding: 0.9rem 1rem; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; }
-    .tile:hover { box-shadow: 0 4px 14px rgba(0,0,0,.1); transform: translateY(-1px); }
-    .tile .t { font-weight: 700; color: #0d3b6e; font-size: 0.95rem; }
-    .tile .d { font-size: 0.83rem; color: #666; margin-top: 0.2rem; }
     .btn { display: inline-block; background: #0d3b6e; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 8px; margin: 0.2rem 0.4rem 0.6rem 0; }
     .btn.secondary { background: #e9eef6; color: #0d3b6e; }
     .btn:hover { opacity: 0.92; }
@@ -89,6 +113,28 @@ def nav_html(active):
     )
 
 
+def stack_tables(html):
+    """Give every table a mobile stacking class and data-label attributes from its header row."""
+    def fix(m):
+        table = m.group(0)
+        heads = re.findall(r"<th[^>]*>(.*?)</th>", table, re.S)
+        if not heads or "</thead>" not in table:
+            return table
+        labels = [re.sub(r"<[^>]+>", "", h).strip() for h in heads]
+        head, body = table.split("</thead>", 1)
+        def fix_row(rm):
+            row = rm.group(0)
+            i = [0]
+            def fix_td(tm):
+                lab = labels[i[0]] if i[0] < len(labels) else ""
+                i[0] += 1
+                return f'<td data-label="{lab}"' + tm.group(1)
+            return re.sub(r"<td((?:\s[^>]*)?>)", fix_td, row)
+        body = re.sub(r"<tr>.*?</tr>", fix_row, body, flags=re.S)
+        return (head + "</thead>" + body).replace("<table>", '<table class="stack">', 1)
+    return re.sub(r"<table>.*?</table>", fix, html, flags=re.S)
+
+
 def page(filename, title, subtitle, body, toc=None):
     toc_html = ""
     if toc:
@@ -100,7 +146,7 @@ def page(filename, title, subtitle, body, toc=None):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title} | Kittery Point Yacht Club</title>
   <link rel="icon" href="assets/favicon.png">
-  <style>{CSS}</style>
+  <style>{NAV_CSS}{CSS}</style>
 </head>
 <body>
   {nav_html(filename)}
@@ -112,9 +158,10 @@ def page(filename, title, subtitle, body, toc=None):
     </div>
     <div class="card-body">
       {toc_html}
-      {body}
+      {stack_tables(body)}
     </div>
   </div>
+  {NAV_SCRIPT}
   <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854 &middot; (603) 436-9303<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
 </body>
 </html>
@@ -492,10 +539,15 @@ def update_index():
     if 'id="club-info"' not in s:
         s = s.replace('  <div class="card contacts-card" id="contacts">', HOME_TILES + '\n  <div class="card contacts-card" id="contacts">', 1)
     # shared nav styles appended once
-    if ".nav-inner" not in s:
-        nav_css = "\n".join(l for l in CSS.splitlines() if l.strip().startswith((".nav", ".tiles", ".tile")))
-        nav_css += "\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: 8rem; }"
-        s = s.replace("  </style>", nav_css + "\n  </style>", 1)
+    extra = "\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: 8rem; }\n    @media (max-width: 700px) { .toc-card { position: static; } .card[id] { scroll-margin-top: 4rem; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }\n"
+    block = NAV_CSS.strip("\n") + extra
+    if "/* nav-css:start */" in s:
+        s = re.sub(r"\n?    /\* nav-css:start \*/.*?(?=\n  </style>)", "\n" + block, s, flags=re.S)
+    else:
+        s = re.sub(r"\n    \.nav \{ position: sticky;.*?(?=\n  </style>)", "", s, flags=re.S)
+        s = s.replace("  </style>", block + "\n  </style>", 1)
+    if "DOMContentLoaded" not in s:
+        s = s.replace("</body>", NAV_SCRIPT + "\n</body>", 1)
     p.write_text(s)
     print("updated index.html")
 
