@@ -329,8 +329,15 @@ DOCKS = """
 </table>
 <p>Every dinghy, kayak and paddle board must be clearly marked with the member's name and must display the current season's sticker. Stickers are issued by the Treasurer once the fee is paid. <strong>Craft without a current season sticker will be removed.</strong> Kayaks and paddle boards are cleared from the racks at the end of the season so the sailing school boats can be stored for the winter.</p>
 
-<h2 id="moorings">River moorings</h2>
-<p>The Club owns four river moorings in front of the clubhouse. They are rented to members seasonally, and there is a waiting list. Any member renting a Club mooring must show that they are on a state or town mooring list somewhere in the area; Club moorings are not a permanent mooring solution. Contact the Dock Master, Doug Pinciaro (<a href="mailto:dpinciaro@comcast.net">dpinciaro@comcast.net</a>, 603-475-2828). The launch monitors VHF channel 68 during operating hours.</p>
+<h2 id="moorings">Club moorings</h2>
+<p>The Club rents moorings to members by the season, in the river in front of the clubhouse and in the Back Channel. There is a waiting list. Any member renting a Club mooring must show that they are on a state or town mooring list somewhere in the area; Club moorings are not a permanent mooring solution. Contact the Dock Master, Doug Pinciaro (<a href="mailto:dpinciaro@comcast.net">dpinciaro@comcast.net</a>, 603-475-2828). The launch monitors VHF channel 68 during operating hours.</p>
+<table>
+  <thead><tr><th>Mooring</th><th>Season fee (2026)</th></tr></thead>
+  <tbody>
+    <tr><td>River mooring, in front of the clubhouse</td><td>$1,500</td></tr>
+    <tr><td>Back Channel mooring</td><td>$1,250</td></tr>
+  </tbody>
+</table>
 <p>By Board policy (1989), a $10 per night guest fee applies when a Club mooring is used by a guest; it covers launch service and use of the club and goes to the Club. The Club asks the mooring's renter for permission before assigning it to a guest.</p>
 
 <h2 id="shoals">Isles of Shoals moorings</h2>
@@ -465,7 +472,7 @@ def build_pages():
     page("clubhouse.html", "Clubhouse", "Facilities, house rules and off-season rentals", CLUBHOUSE,
          [("facilities", "Facilities"), ("rules", "Clubhouse rules"), ("rentals", "Rentals")])
     page("docks-moorings.html", "Docks &amp; Moorings", "Float, dinghies, river and Isles of Shoals moorings", DOCKS,
-         [("tieup", "Front float"), ("dinghies", "Dinghy and kayak storage"), ("moorings", "River moorings"), ("shoals", "Isles of Shoals"), ("workdays", "Docks In and Out")])
+         [("tieup", "Front float"), ("dinghies", "Dinghy and kayak storage"), ("moorings", "Club moorings"), ("shoals", "Isles of Shoals"), ("workdays", "Docks In and Out")])
     page("sailing-school.html", "KPYC Sailing School", "Teaching sailing on the Seacoast for over 30 years", SCHOOL,
          [("programs", "Programs"), ("know", "Need to know"), ("scholarship", "Scholarship")])
     page("social-education.html", "Social &amp; Education", "The season's events, racing and member classes", SOCIAL,
