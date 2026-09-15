@@ -45,11 +45,21 @@ NAV_CSS = """
       .nav-links::-webkit-scrollbar { display: none; }
       .nav-links a { white-space: nowrap; font-size: 0.86rem; padding: 0.35rem 0.6rem; }
       .tiles { grid-template-columns: 1fr; }
+      .nav.js .nav-toggle { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; margin-left: auto; background: none; border: 0; padding: 10px 8px; cursor: pointer; }
+      .nav.js .nav-toggle span { display: block; width: 24px; height: 2.5px; background: #fff; border-radius: 2px; transition: transform .2s, opacity .2s; }
+      .nav.js.open .nav-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+      .nav.js.open .nav-toggle span:nth-child(2) { opacity: 0; }
+      .nav.js.open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+      .nav.js .nav-inner { flex-wrap: wrap; }
+      .nav.js .nav-links { display: none; flex-direction: column; width: 100%; flex: none; overflow: visible; mask-image: none; -webkit-mask-image: none; padding: 0.25rem 0 0.6rem; gap: 0.1rem; }
+      .nav.js.open .nav-links { display: flex; }
+      .nav.js .nav-links a { display: block; font-size: 0.98rem; padding: 0.6rem 0.75rem; }
     }
+    .nav-toggle { display: none; }
     /* nav-css:end */
 """
 
-NAV_SCRIPT = """<script>document.addEventListener('DOMContentLoaded',function(){var a=document.querySelector('.nav-links a.active');if(a&&window.innerWidth<=700){var l=a.closest('.nav-links');var r=a.getBoundingClientRect(),lr=l.getBoundingClientRect();l.scrollLeft=Math.max(0,(r.left-lr.left)+l.scrollLeft-lr.width/2+r.width/2);}});</script>"""
+NAV_SCRIPT = """<script>document.addEventListener('DOMContentLoaded',function(){var n=document.querySelector('.nav'),t=n&&n.querySelector('.nav-toggle'),l=n&&n.querySelector('.nav-links');if(!n||!t||!l)return;n.classList.add('js');t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});l.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});document.addEventListener('click',function(e){if(!n.contains(e.target)){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});});</script>"""
 
 CSS = """
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -109,6 +119,7 @@ def nav_html(active):
     return (
         '<nav class="nav"><div class="nav-inner">'
         '<a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a>'
+        '<button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>'
         f'<ul class="nav-links">{items}</ul></div></nav>'
     )
 
@@ -546,8 +557,8 @@ def update_index():
     else:
         s = re.sub(r"\n    \.nav \{ position: sticky;.*?(?=\n  </style>)", "", s, flags=re.S)
         s = s.replace("  </style>", block + "\n  </style>", 1)
-    if "DOMContentLoaded" not in s:
-        s = s.replace("</body>", NAV_SCRIPT + "\n</body>", 1)
+    s = re.sub(r"<script>document\.addEventListener\('DOMContentLoaded'.*?</script>\n?", "", s, flags=re.S)
+    s = s.replace("</body>", NAV_SCRIPT + "\n</body>", 1)
     p.write_text(s)
     print("updated index.html")
 

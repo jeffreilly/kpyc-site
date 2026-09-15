@@ -27,7 +27,17 @@
       .nav-links::-webkit-scrollbar { display: none; }
       .nav-links a { white-space: nowrap; font-size: 0.86rem; padding: 0.35rem 0.6rem; }
       .tiles { grid-template-columns: 1fr; }
+      .nav.js .nav-toggle { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; margin-left: auto; background: none; border: 0; padding: 10px 8px; cursor: pointer; }
+      .nav.js .nav-toggle span { display: block; width: 24px; height: 2.5px; background: #fff; border-radius: 2px; transition: transform .2s, opacity .2s; }
+      .nav.js.open .nav-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+      .nav.js.open .nav-toggle span:nth-child(2) { opacity: 0; }
+      .nav.js.open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+      .nav.js .nav-inner { flex-wrap: wrap; }
+      .nav.js .nav-links { display: none; flex-direction: column; width: 100%; flex: none; overflow: visible; mask-image: none; -webkit-mask-image: none; padding: 0.25rem 0 0.6rem; gap: 0.1rem; }
+      .nav.js.open .nav-links { display: flex; }
+      .nav.js .nav-links a { display: block; font-size: 0.98rem; padding: 0.6rem 0.75rem; }
     }
+    .nav-toggle { display: none; }
     /* nav-css:end */
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -79,7 +89,7 @@
 </style>
 </head>
 <body>
-  <nav class="nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="membership.html">Membership</a></li><li><a href="new-members.html">New Members</a></li><li><a href="launch.html">Launch</a></li><li><a href="clubhouse.html">Clubhouse</a></li><li><a href="docks-moorings.html">Docks &amp; Moorings</a></li><li><a href="sailing-school.html" class="active">Sailing School</a></li><li><a href="social-education.html">Social &amp; Education</a></li><li><a href="documents.html">Documents</a></li></ul></div></nav>
+  <nav class="nav"><div class="nav-inner"><a class="nav-brand" href="index.html"><img src="assets/KPYC_burgee_wave.png" alt="">KPYC</a><button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="membership.html">Membership</a></li><li><a href="new-members.html">New Members</a></li><li><a href="launch.html">Launch</a></li><li><a href="clubhouse.html">Clubhouse</a></li><li><a href="docks-moorings.html">Docks &amp; Moorings</a></li><li><a href="sailing-school.html" class="active">Sailing School</a></li><li><a href="social-education.html">Social &amp; Education</a></li><li><a href="documents.html">Documents</a></li></ul></div></nav>
   <div class="card">
     <div class="card-header">
       <img class="burgee" src="assets/KPYC_burgee_wave.png" alt="KPYC burgee">
@@ -116,7 +126,7 @@
 
     </div>
   </div>
-  <script>document.addEventListener('DOMContentLoaded',function(){var a=document.querySelector('.nav-links a.active');if(a&&window.innerWidth<=700){var l=a.closest('.nav-links');var r=a.getBoundingClientRect(),lr=l.getBoundingClientRect();l.scrollLeft=Math.max(0,(r.left-lr.left)+l.scrollLeft-lr.width/2+r.width/2);}});</script>
+  <script>document.addEventListener('DOMContentLoaded',function(){var n=document.querySelector('.nav'),t=n&&n.querySelector('.nav-toggle'),l=n&&n.querySelector('.nav-links');if(!n||!t||!l)return;n.classList.add('js');t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});l.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});document.addEventListener('click',function(e){if(!n.contains(e.target)){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});});</script>
   <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854 &middot; (603) 436-9303<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
 </body>
 </html>
