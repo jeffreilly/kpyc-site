@@ -110,6 +110,28 @@ CSS = """
     @media (max-width: 600px) { .card-body { padding: 1.25rem 1.1rem 1.5rem; } .nav-links a { font-size: 0.8rem; padding: 0.25rem 0.45rem; } }
 """
 
+# Upcoming clubhouse dates, fall and winter 2026. kind: "club" (named) or "rental" (shown as reserved).
+EVENTS = [
+    ("Thu Oct 15", "rental", "Reserved: private member event"),
+    ("Sat Oct 17", "club", "Docks Out work day, 8:00 AM to noon"),
+    ("Thu Oct 22", "club", "October semiannual membership meeting: Director elections, trophies, sailing school vote"),
+    ("Sun Nov 8 or Mon Nov 9", "rental", "Reserved: private member event (date to be confirmed)"),
+    ("Sat Nov 14", "club", "Club event, details to be announced"),
+    ("Fri Nov 20", "rental", "Reserved: private member event"),
+    ("Sun Nov 29", "rental", "Reserved: private member event"),
+    ("Sat Dec 5", "rental", "Reserved: private event"),
+    ("Sat Dec 12", "club", "KPYC Christmas Party"),
+    ("Fri Jan 1", "club", "KPYC New Year's Day Bloody Mary Party"),
+]
+
+
+def events_table(kinds=("club", "rental")):
+    rows = "".join(
+        f"<tr><td>{d}</td><td>{'Club event' if k == 'club' else 'Reserved'}</td><td>{t}</td></tr>"
+        for d, k, t in EVENTS if k in kinds
+    )
+    return f"<table><thead><tr><th>Date</th><th>Type</th><th>Details</th></tr></thead><tbody>{rows}</tbody></table>"
+
 
 def nav_html(active):
     items = "".join(
@@ -353,6 +375,9 @@ CLUBHOUSE = """
 <h2 id="rentals">Clubhouse rentals</h2>
 <p>Club members may rent the Club for private functions on a first come, first served basis after October 15 and before May 1. No rentals are permitted from May 1 through October 15. Any member who rents the Club must be present at the event, and the rental and deposit checks must be written by the member, not by someone they are sponsoring. Members must reserve the Club if they want exclusive use of the Clubhouse or plan to decorate it; an event that involves decorating and inviting people is a "party" under Board policy and is subject to the rental policy. The Club may not be used for commercial purposes.</p>
 <div class="note">The last published rental fee was $300 for members plus a refundable deposit check. Confirm the current fee, deposit and payment method with the House Chair, Dylan Kimmel (<a href="mailto:dkimmel@neintegration.com">dkimmel@neintegration.com</a>), or the Social Chair, Alison Magill, before booking. While the website is down, reservations are made by email to the House Chair rather than through the online form.</div>
+<h3>Clubhouse calendar, fall and winter 2026</h3>
+<p>The club will not have an online calendar until the new website launches. Dates already booked or scheduled are listed here and on the clubhouse bulletin board; check with the House Chair before requesting a date.</p>
+""" + events_table() + """
 <h3>How to reserve</h3>
 <ol>
   <li>Check the calendar on the clubhouse wall for your date, then email the House Chair with your name, phone, requested date, start and end times, and expected number of guests.</li>
@@ -435,6 +460,9 @@ SCHOOL = """
 """
 
 SOCIAL = """
+<h2 id="upcoming">Upcoming club events</h2>
+<p>Until the new website brings back the online calendar, upcoming club events are listed here and announced by email.</p>
+""" + events_table(("club",)) + """
 <h2 id="social">The social season</h2>
 <div class="photos">
   <div><img src="assets/racing_66.jpg" alt="Racing off the club"></div>
@@ -531,13 +559,13 @@ def build_pages():
     page("launch.html", "Launch Service", "Hours, channel 68, rules and etiquette", LAUNCH,
          [("hours", "Hours"), ("rules", "Rules")])
     page("clubhouse.html", "Clubhouse", "Facilities, house rules and off-season rentals", CLUBHOUSE,
-         [("facilities", "Facilities"), ("rules", "Clubhouse rules"), ("rentals", "Rentals")])
+         [("facilities", "Facilities"), ("rules", "Clubhouse rules"), ("rentals", "Rentals and calendar")])
     page("docks-moorings.html", "Docks &amp; Moorings", "Float, dinghies, river and Isles of Shoals moorings", DOCKS,
          [("tieup", "Front float"), ("dinghies", "Dinghy and kayak storage"), ("moorings", "Club moorings"), ("shoals", "Isles of Shoals"), ("workdays", "Docks In and Out")])
     page("sailing-school.html", "KPYC Sailing School", "Teaching sailing on the Seacoast for over 30 years", SCHOOL,
          [("programs", "Programs"), ("know", "Need to know"), ("scholarship", "Scholarship")])
     page("social-education.html", "Social &amp; Education", "The season's events, racing and member classes", SOCIAL,
-         [("social", "Social season"), ("racing", "Racing"), ("education", "Education")])
+         [("upcoming", "Upcoming events"), ("social", "Social season"), ("racing", "Racing"), ("education", "Education")])
     page("documents.html", "Documents", "By-Laws, forms, rules and Board policies", DOCUMENTS,
          [("downloads", "Downloads"), ("pages", "Rules and guides"), ("policies", "Board policies"), ("about", "About this site")])
 
@@ -550,11 +578,16 @@ def update_index():
         s = re.sub(r"<!-- nav:start -->.*?<!-- nav:end -->", f"<!-- nav:start -->{nav}<!-- nav:end -->", s, flags=re.S)
     else:
         s = s.replace("<body>\n", f"<body>\n<!-- nav:start -->{nav}<!-- nav:end -->\n", 1)
+    events_card = "  <div class=\"card\" id=\"upcoming\">\n    <div class=\"card-header\"><h1>Upcoming Club Events</h1><div class=\"est\">Announced by email until the online calendar returns</div></div>\n    <div class=\"card-body\">" + stack_tables(events_table(("club",))) + "<p style=\"margin:0.4rem 0 0;font-size:0.9rem;\"><a href=\"clubhouse.html#rentals\">Reserved clubhouse dates</a> are on the Clubhouse page.</p></div>\n  </div>\n"
+    s = re.sub(r"  <div class=\"card\" id=\"upcoming\">.*?</div>\n  </div>\n", "", s, flags=re.S)
+    s = s.replace("  <div class=\"card\" id=\"club-info\">", events_card + "  <div class=\"card\" id=\"club-info\">", 1)
     if 'id="club-info"' not in s:
         s = s.replace('  <div class="card contacts-card" id="contacts">', HOME_TILES + '\n  <div class="card contacts-card" id="contacts">', 1)
     # shared nav styles appended once
     extra = "\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: 8rem; }\n    @media (max-width: 700px) { .toc-card { position: static; } .card[id] { scroll-margin-top: 4rem; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }\n"
-    block = NAV_CSS.strip("\n") + extra
+    tstart = CSS.index("    table {"); tend = CSS.index("    .rules-box {")
+    table_css = "\n" + CSS[tstart:tend].rstrip("\n") + "\n"
+    block = NAV_CSS.strip("\n") + table_css + extra
     if "/* nav-css:start */" in s:
         s = re.sub(r"\n?    /\* nav-css:start \*/.*?(?=\n  </style>)", "\n" + block, s, flags=re.S)
     else:

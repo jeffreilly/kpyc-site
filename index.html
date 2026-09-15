@@ -294,6 +294,20 @@
     }
     .nav-toggle { display: none; }
     /* nav-css:end */
+    table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 1rem; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #eceff3; vertical-align: top; }
+    th { color: #0d3b6e; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:last-child td { border-bottom: none; }
+    @media (max-width: 600px) {
+      table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+      table.stack thead { display: none; }
+      table.stack tr { border: 1px solid #eceff3; border-radius: 8px; padding: 0.5rem 0.75rem; margin-bottom: 0.6rem; background: #f8f9fb; }
+      table.stack td { border: none; padding: 0.15rem 0; }
+      table.stack td::before { content: attr(data-label); display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: #0d3b6e; font-weight: 700; margin-top: 0.3rem; }
+      table.stack td:first-child::before { margin-top: 0; }
+      table.stack td:first-child { font-weight: 700; color: #0d3b6e; }
+    }
+
     body { padding-top: 0; justify-content: flex-start; }
     .nav { margin-top: 0; }
     .toc-card { top: 3.4rem; }
@@ -343,6 +357,10 @@
   </div>
 
 
+  <div class="card" id="upcoming">
+    <div class="card-header"><h1>Upcoming Club Events</h1><div class="est">Announced by email until the online calendar returns</div></div>
+    <div class="card-body"><table class="stack"><thead><tr><th>Date</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td data-label="Date">Sat Oct 17</td><td data-label="Type">Club event</td><td data-label="Details">Docks Out work day, 8:00 AM to noon</td></tr><tr><td data-label="Date">Thu Oct 22</td><td data-label="Type">Club event</td><td data-label="Details">October semiannual membership meeting: Director elections, trophies, sailing school vote</td></tr><tr><td data-label="Date">Sat Nov 14</td><td data-label="Type">Club event</td><td data-label="Details">Club event, details to be announced</td></tr><tr><td data-label="Date">Sat Dec 12</td><td data-label="Type">Club event</td><td data-label="Details">KPYC Christmas Party</td></tr><tr><td data-label="Date">Fri Jan 1</td><td data-label="Type">Club event</td><td data-label="Details">KPYC New Year's Day Bloody Mary Party</td></tr></tbody></table><p style="margin:0.4rem 0 0;font-size:0.9rem;"><a href="clubhouse.html#rentals">Reserved clubhouse dates</a> are on the Clubhouse page.</p></div>
+  </div>
   <div class="card" id="club-info">
     <div class="card-header">
       <h1>Club Information</h1>
