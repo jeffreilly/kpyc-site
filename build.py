@@ -116,7 +116,7 @@ EVENTS = [
     ("Sat Oct 17", "club", "Docks Out work day, 8:00 AM to noon"),
     ("Thu Oct 22", "club", "October semiannual membership meeting: Director elections, trophies, sailing school vote"),
     ("Sun Nov 8 or Mon Nov 9", "rental", "Reserved: private member event (date to be confirmed)"),
-    ("Sat Nov 14", "club", "Oktoberfest Pub Night"),
+    ("Sat Nov 14", "club", "Club event, details to be announced"),
     ("Fri Nov 20", "rental", "Reserved: private member event"),
     ("Sun Nov 29", "rental", "Reserved: private member event"),
     ("Sat Dec 5", "rental", "Reserved: private event"),
