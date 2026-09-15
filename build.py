@@ -584,7 +584,7 @@ def update_index():
     if 'id="club-info"' not in s:
         s = s.replace('  <div class="card contacts-card" id="contacts">', HOME_TILES + '\n  <div class="card contacts-card" id="contacts">', 1)
     # shared nav styles appended once
-    extra = "\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: 8rem; }\n    @media (max-width: 700px) { .toc-card { position: static; } .card[id] { scroll-margin-top: 4rem; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }\n"
+    extra = "\n    .card { max-width: 860px; }\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: 8rem; }\n    @media (max-width: 700px) { .toc-card { position: static; } .card[id] { scroll-margin-top: 4rem; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }\n"
     tstart = CSS.index("    table {"); tend = CSS.index("    .rules-box {")
     table_css = "\n" + CSS[tstart:tend].rstrip("\n") + "\n"
     block = NAV_CSS.strip("\n") + table_css + extra
