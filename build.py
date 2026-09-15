@@ -173,7 +173,7 @@ def page(filename, title, subtitle, body, toc=None):
     </div>
   </div>
   {NAV_SCRIPT}
-  <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854 &middot; (603) 436-9303<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
+  <footer>Kittery Point Yacht Club &middot; 328 Portsmouth Ave., PO Box 373, New Castle, NH 03854<br>Interim website. Content is drawn from the club's printed Welcome booklet and earlier website and is being reviewed by the committees; please confirm fees and dates with the officer listed.</footer>
 </body>
 </html>
 """
