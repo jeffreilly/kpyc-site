@@ -233,6 +233,8 @@ MEMBERSHIP = """
 """
 
 NEW_MEMBERS = """
+<a class="btn" href="docs/KPYC_Welcome_Booklet_2026.pdf">Download the New Member Welcome Booklet (PDF)</a>
+<p style="font-size:0.85rem;color:#777;">The booklet given to new members: welcome letter, launch rules, this reference guide, clubhouse rules, Board policies, facilities, the social season, the sailing school, and 2026 club contacts.</p>
 <p>Welcome to the Kittery Point Yacht Club. We want everyone to enjoy their association with the Club, so this guide will help you navigate your way around. Please also read the <a href="clubhouse.html#rules">Clubhouse Rules</a>, the <a href="documents.html#policies">Board of Directors' Established Policies</a>, and the <a href="docs/KPYC_ByLaws_January_2024.pdf">Constitution and By-Laws</a>. If you have a question these do not answer, contact any member of the Board of Directors.</p>
 
 <h2 id="welcome">Welcome aboard</h2>
@@ -472,6 +474,7 @@ DOCUMENTS = """
 <div class="tiles">
   <a class="tile" href="docs/KPYC_ByLaws_January_2024.pdf"><div class="t">Constitution and By-Laws</div><div class="d">Revised January 2024 (PDF)</div></a>
   <a class="tile" href="docs/KPYC_Membership_Application_2026.pdf"><div class="t">Membership Application</div><div class="d">Procedures, application, and sponsor recommendation pages (PDF)</div></a>
+  <a class="tile" href="docs/KPYC_Welcome_Booklet_2026.pdf"><div class="t">New Member Welcome Booklet</div><div class="d">2026 edition of the booklet given to new members (PDF)</div></a>
 </div>
 
 <h2 id="pages">Club rules and guides on this site</h2>
