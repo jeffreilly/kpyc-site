@@ -119,7 +119,7 @@ EVENTS = [
     ("Sat Nov 14", "club", "Club event, details to be announced"),
     ("Fri Nov 20", "rental", "Reserved: private member event"),
     ("Sun Nov 29", "rental", "Reserved: private member event"),
-    ("Sat Dec 5", "rental", "Reserved: private event"),
+    ("Sat Dec 5", "club", "NEI (Dylan Kimmel)"),
     ("Sat Dec 12", "club", "KPYC Christmas Party"),
     ("Fri Jan 1", "club", "KPYC New Year's Day Bloody Mary Party"),
 ]
