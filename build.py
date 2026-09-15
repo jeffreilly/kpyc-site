@@ -229,7 +229,7 @@ MEMBERSHIP = """
     <tr><td>Share purchase at the then current price (one-time, after the probationary month; KPYC will purchase the Share back on resignation, at the then current price, once a new member takes your place)</td><td>$510</td></tr>
   </tbody>
 </table>
-<p>Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee. Checks are payable to Kittery Point Yacht Club.</p>
+<p>Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee. Payment of any KPYC fees by published electronic means is highly preferable. Checks are payable to Kittery Point Yacht Club and must include an additional $5 handling fee. <em>(Electronic payment preference and the check handling fee are pending Board approval.)</em></p>
 
 <h2 id="application">Application form</h2>
 <p>The application is a four-page PDF: the procedures, the application itself, and one Sponsor Recommendation page for each of your two sponsors.</p>
