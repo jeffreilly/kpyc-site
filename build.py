@@ -226,7 +226,7 @@ MEMBERSHIP = """
   <tbody>
     <tr><td>Application fee (paid with the application; non-refundable, even if you later withdraw)</td><td>$250</td></tr>
     <tr><td>Annual dues (regular membership; prorated by month in your first year)</td><td>$500</td></tr>
-    <tr><td>Share Value (one-time, after the probationary month; refundable on resignation once a new member takes your place)</td><td>$510</td></tr>
+    <tr><td>Share purchase at the then current price (one-time, after the probationary month; KPYC will purchase the Share back on resignation, at the then current price, once a new member takes your place)</td><td>$510</td></tr>
   </tbody>
 </table>
 <p>Dues notices for continuing members go out the first week of February; dues unpaid after March 30 are subject to a late fee. Checks are payable to Kittery Point Yacht Club.</p>
