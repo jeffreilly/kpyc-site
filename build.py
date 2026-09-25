@@ -112,6 +112,7 @@ CSS = """
 
 # Upcoming clubhouse dates, fall and winter 2026. kind: "club" (named) or "rental" (shown as reserved).
 EVENTS = [
+    ("Fri Oct 2", "club", "Oktoberfest Pub Night, 5:00 PM to 9:00 PM, $20 per person"),
     ("Thu Oct 15", "rental", "Reserved: private member event"),
     ("Sat Oct 17", "club", "Docks Out work day, 8:00 AM to noon"),
     ("Thu Oct 22", "club", "October semiannual membership meeting: Director elections, trophies, sailing school vote"),
@@ -237,7 +238,7 @@ MEMBERSHIP = """
 <a class="btn" href="docs/KPYC_Membership_Application_2026.pdf">Download the Membership Application (PDF)</a>
 <h3>How to submit while the online form is offline</h3>
 <ol>
-  <li>Print and complete page 2, sign it, and send it with your $250 check (payable to Kittery Point Yacht Club) to the Membership Chair: Chris Snow, Kittery Point Yacht Club, PO Box 373, New Castle, NH 03854-0373. You may email a scan of the application to <a href="mailto:csnow@nhpta.com">csnow@nhpta.com</a> and mail the check separately.</li>
+  <li>Print and complete page 2, sign it, and send it with your $250 check (payable to Kittery Point Yacht Club) to the Membership Chair: Chris Snow, Kittery Point Yacht Club, PO Box 373, New Castle, NH 03854-0373. You may email a scan of the application to <a href="mailto:membership@kpyc.net">membership@kpyc.net</a> and mail the check separately.</li>
   <li>Give each of your two sponsors a copy of a Sponsor Recommendation page (pages 3 and 4). Each sponsor sends their completed page directly to the Membership Chair by mail or email, not back to you, so recommendations stay confidential.</li>
   <li>Your application is complete when all three items have arrived. The date the last item is received is your date of record for the waiting list, and the Membership Chair will confirm by email.</li>
 </ol>
