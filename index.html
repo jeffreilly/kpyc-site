@@ -37,10 +37,6 @@
       margin-top: 1.5rem;
     }
 
-    .card[id] {
-      scroll-margin-top: 6.5rem;
-    }
-
     .toc-card {
       position: sticky;
       top: 1rem;
@@ -312,8 +308,8 @@
     body { padding-top: 0; justify-content: flex-start; }
     .nav { margin-top: 0; }
     .toc-card { top: 3.4rem; }
-    .card[id] { scroll-margin-top: 8rem; }
-    @media (max-width: 700px) { .toc-card { position: static; } .card[id] { scroll-margin-top: 4rem; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }
+    .card[id] { scroll-margin-top: calc(var(--nav-h, 90px) + 1rem); }
+    @media (max-width: 700px) { .toc-card { position: static; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }
 
   </style>
 </head>
@@ -541,6 +537,6 @@
   <footer>
     &copy; 2026 Kittery Point Yacht Club &nbsp;&middot;&nbsp; kpyc.org
   </footer>
-<script>document.addEventListener('DOMContentLoaded',function(){var n=document.querySelector('.nav'),t=n&&n.querySelector('.nav-toggle'),l=n&&n.querySelector('.nav-links');if(!n||!t||!l)return;n.classList.add('js');t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});l.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});document.addEventListener('click',function(e){if(!n.contains(e.target)){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});});</script>
+<script>document.addEventListener('DOMContentLoaded',function(){var n=document.querySelector('.nav'),t=n&&n.querySelector('.nav-toggle'),l=n&&n.querySelector('.nav-links');if(!n)return;function setNavH(){if(n.classList.contains('open'))return;document.documentElement.style.setProperty('--nav-h',n.offsetHeight+'px');}setNavH();window.addEventListener('resize',setNavH);if(window.ResizeObserver)new ResizeObserver(setNavH).observe(n);if(location.hash){var h=document.getElementById(location.hash.slice(1));if(h)requestAnimationFrame(function(){h.scrollIntoView();});}if(!t||!l)return;n.classList.add('js');t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});l.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});document.addEventListener('click',function(e){if(!n.contains(e.target)){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});});</script>
 </body>
 </html>

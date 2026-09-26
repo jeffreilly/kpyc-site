@@ -59,7 +59,7 @@ NAV_CSS = """
     /* nav-css:end */
 """
 
-NAV_SCRIPT = """<script>document.addEventListener('DOMContentLoaded',function(){var n=document.querySelector('.nav'),t=n&&n.querySelector('.nav-toggle'),l=n&&n.querySelector('.nav-links');if(!n||!t||!l)return;n.classList.add('js');t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});l.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});document.addEventListener('click',function(e){if(!n.contains(e.target)){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});});</script>"""
+NAV_SCRIPT = """<script>document.addEventListener('DOMContentLoaded',function(){var n=document.querySelector('.nav'),t=n&&n.querySelector('.nav-toggle'),l=n&&n.querySelector('.nav-links');if(!n)return;function setNavH(){if(n.classList.contains('open'))return;document.documentElement.style.setProperty('--nav-h',n.offsetHeight+'px');}setNavH();window.addEventListener('resize',setNavH);if(window.ResizeObserver)new ResizeObserver(setNavH).observe(n);if(location.hash){var h=document.getElementById(location.hash.slice(1));if(h)requestAnimationFrame(function(){h.scrollIntoView();});}if(!t||!l)return;n.classList.add('js');t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');});l.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});document.addEventListener('click',function(e){if(!n.contains(e.target)){n.classList.remove('open');t.setAttribute('aria-expanded','false');}});});</script>"""
 
 CSS = """
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,7 +67,7 @@ CSS = """
     body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.65; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0 1.25rem 2rem; }
     .card { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.10); max-width: 860px; width: 100%; overflow: hidden; }
     .card + .card { margin-top: 1.5rem; }
-    .card[id], h2[id] { scroll-margin-top: 8rem; }
+    .card[id], h2[id] { scroll-margin-top: calc(var(--nav-h, 90px) + 1rem); }
     .card-header { background: linear-gradient(135deg, #0d3b6e 0%, #1a5fa8 100%); color: #fff; padding: 2rem 2rem 1.6rem; text-align: center; }
     .card-header h1 { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
     .card-header .est { font-size: 0.85rem; opacity: 0.7; letter-spacing: 0.04em; }
@@ -107,7 +107,7 @@ CSS = """
     .toc { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin: 0 0 1rem; }
     .toc a { font-size: 0.88rem; font-weight: 600; text-decoration: none; }
     footer { text-align: center; font-size: 0.78rem; color: #aaa; margin-top: 2rem; }
-    @media (max-width: 600px) { .card-body { padding: 1.25rem 1.1rem 1.5rem; } .nav-links a { font-size: 0.8rem; padding: 0.25rem 0.45rem; } .card[id], h2[id] { scroll-margin-top: 4.5rem; } }
+    @media (max-width: 600px) { .card-body { padding: 1.25rem 1.1rem 1.5rem; } .nav-links a { font-size: 0.8rem; padding: 0.25rem 0.45rem; } }
 """
 
 # Upcoming clubhouse dates, fall and winter 2026. kind: "club" (named) or "rental" (shown as reserved).
@@ -586,7 +586,7 @@ def update_index():
     if 'id="club-info"' not in s:
         s = s.replace('  <div class="card contacts-card" id="contacts">', HOME_TILES + '\n  <div class="card contacts-card" id="contacts">', 1)
     # shared nav styles appended once
-    extra = "\n    .card { max-width: 860px; }\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: 8rem; }\n    @media (max-width: 700px) { .toc-card { position: static; } .card[id] { scroll-margin-top: 4rem; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }\n"
+    extra = "\n    .card { max-width: 860px; }\n    body { padding-top: 0; justify-content: flex-start; }\n    .nav { margin-top: 0; }\n    .toc-card { top: 3.4rem; }\n    .card[id] { scroll-margin-top: calc(var(--nav-h, 90px) + 1rem); }\n    @media (max-width: 700px) { .toc-card { position: static; } .card-body { padding: 1.4rem 1.2rem 1.6rem; } }\n"
     tstart = CSS.index("    table {"); tend = CSS.index("    .rules-box {")
     table_css = "\n" + CSS[tstart:tend].rstrip("\n") + "\n"
     block = NAV_CSS.strip("\n") + table_css + extra
