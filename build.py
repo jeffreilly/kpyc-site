@@ -464,8 +464,8 @@ SCHOOL = """
 
 SOCIAL = """
 <h2 id="upcoming">Upcoming club events</h2>
-<p>Until the new website brings back the online calendar, upcoming club events are listed here and announced by email.</p>
-""" + events_table(("club",)) + """
+<p>Until the new website brings back the online calendar, upcoming club events and clubhouse reservations are listed here and announced by email.</p>
+""" + events_table() + """
 <h2 id="social">The social season</h2>
 <div class="photos">
   <div><img src="assets/racing_66.jpg" alt="Racing off the club"></div>
@@ -581,7 +581,7 @@ def update_index():
         s = re.sub(r"<!-- nav:start -->.*?<!-- nav:end -->", f"<!-- nav:start -->{nav}<!-- nav:end -->", s, flags=re.S)
     else:
         s = s.replace("<body>\n", f"<body>\n<!-- nav:start -->{nav}<!-- nav:end -->\n", 1)
-    events_card = "  <div class=\"card\" id=\"upcoming\">\n    <div class=\"card-header\"><h1>Upcoming Club Events</h1><div class=\"est\">Announced by email until the online calendar returns</div></div>\n    <div class=\"card-body\">" + stack_tables(events_table(("club",))) + "<p style=\"margin:0.4rem 0 0;font-size:0.9rem;\"><a href=\"clubhouse.html#rentals\">Reserved clubhouse dates</a> are on the Clubhouse page.</p></div>\n  </div>\n"
+    events_card = "  <div class=\"card\" id=\"upcoming\">\n    <div class=\"card-header\"><h1>Upcoming Club Events</h1><div class=\"est\">Announced by email until the online calendar returns</div></div>\n    <div class=\"card-body\">" + stack_tables(events_table()) + "</div>\n  </div>\n"
     s = re.sub(r"  <div class=\"card\" id=\"upcoming\">.*?</div>\n  </div>\n", "", s, flags=re.S)
     s = s.replace("  <div class=\"card\" id=\"club-info\">", events_card + "  <div class=\"card\" id=\"club-info\">", 1)
     if 'id="club-info"' not in s:
