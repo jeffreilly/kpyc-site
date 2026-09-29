@@ -113,16 +113,17 @@ CSS = """
 # Upcoming clubhouse dates, fall and winter 2026. kind: "club" (named) or "rental" (shown as reserved).
 EVENTS = [
     ("Fri Oct 2", "club", "Oktoberfest Pub Night, 5:00 PM to 9:00 PM, $20 per person"),
-    ("Thu Oct 15", "rental", "Reserved: private member event"),
+    ("Thu Oct 15", "rental", "Reserved: Beth & Mike, Newburyport (last name to be confirmed)"),
     ("Sat Oct 17", "club", "Docks Out work day, 8:00 AM to noon"),
     ("Thu Oct 22", "club", "October semiannual membership meeting: Director elections, trophies, sailing school vote"),
-    ("Fri Oct 30", "rental", "Reserved: private event (pending)"),
-    ("Sun Nov 8 or Mon Nov 9", "rental", "Reserved: private member event (date to be confirmed)"),
+    ("Sun Nov 8 or Mon Nov 9", "rental", "Reserved: Greg Gaffey (date to be confirmed)"),
     ("Sat Nov 14", "club", "Club event, details to be announced"),
-    ("Fri Nov 20", "rental", "Reserved: private member event"),
-    ("Sun Nov 29", "rental", "Reserved: private member event"),
+    ("Sat Nov 21", "rental", "Reserved: Jackson Coyle"),
+    ("Thu Nov 26", "rental", "Reserved: Chris Snow, for Ryder"),
+    ("Sun Nov 29", "rental", "Reserved: Doug Macdonald"),
     ("Sat Dec 5", "club", "NEI (Dylan Kimmel), private event"),
     ("Sat Dec 12", "club", "KPYC Christmas Party"),
+    ("Sun Dec 27", "rental", "Reserved: Nancy & John Sakovitz"),
     ("Fri Jan 1", "club", "KPYC New Year's Day Bloody Mary Party"),
 ]
 
