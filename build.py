@@ -329,6 +329,7 @@ LAUNCH = """
   <ul>
     <li>Maximum capacity: six passengers</li>
     <li>No open containers at any time</li>
+    <li>Federal law requires children under 13 to wear a USCG-approved life jacket while underway</li>
     <li>The driver's directions on seating, trim, boarding and safety are to be followed without exception</li>
   </ul>
 </div>
@@ -336,6 +337,7 @@ LAUNCH = """
   <li>Those requesting and utilizing the KPYC launch service do so at their own risk and agree to hold harmless The Kittery Point Yacht Club, its Board of Directors, officers, employees and members from any and all damage, loss or injury resulting from said launch service.</li>
   <li>Launch capacity is limited to six (6) passengers.</li>
   <li>The "No Open Container" rule is in effect at all times.</li>
+  <li>Federal law requires children under 13 years old to wear a USCG-approved life jacket while underway.</li>
   <li>Directions of the launch driver with respect to seating positions, trim of the boat, embarking, debarking and any other safety related issues are to be followed without exception.</li>
   <li>In the interest of better service and efficiency, the launch driver may at his or her discretion, and not exceeding launch capacity, take aboard individuals or parties traveling to the same or nearby destination regardless of their position in the queue awaiting launch service.</li>
   <li>All members and guests will maintain decorum that is conducive to good order and is considerate of others.</li>
