@@ -571,7 +571,6 @@ ELECTION = """
 <div class="info"><strong>Director election: Thursday, October 22, 2026.</strong> Members may vote by absentee ballot under the By-Laws. Votes cast without a completed ballot and not received by <strong>5 PM on 10/22</strong> will not be counted.</div>
 <a class="btn" href="docs/KPYC_Absentee_Ballot_2026.pdf">Download the ballot (PDF)</a>
 <a class="btn secondary" href="docs/KPYC_Board_Candidate_Bios_2026.pdf">Download the bios (PDF)</a>
-<a class="btn secondary" href="#" onclick="window.print();return false;">Print this page</a>
 
 <h2 id="ballot">Absentee ballot</h2>
 <p>Print a hard copy and complete it by hand. Select 3 nominees by marking an X, and include your name, signature and date. One ballot per member share. Names and selections are kept strictly confidential and are used only to cross-check against meeting attendees to prevent duplicate votes.</p>
