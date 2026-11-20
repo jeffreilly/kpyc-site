@@ -387,8 +387,8 @@ CLUBHOUSE = """
 </ol>
 
 <h2 id="rentals">Clubhouse rentals</h2>
-<p>Club members may rent the Club for private functions on a first come, first served basis after October 15 and before May 1. No rentals are permitted from May 1 through October 15. Any member who rents the Club must be present at the event, and the rental and deposit checks must be written by the member, not by someone they are sponsoring. Members must reserve the Club if they want exclusive use of the Clubhouse or plan to decorate it; an event that involves decorating and inviting people is a "party" under Board policy and is subject to the rental policy. The Club may not be used for commercial purposes.</p>
-<div class="note">The last published rental fee was $300 for members plus a refundable deposit check. Confirm the current fee, deposit and payment method with the House Chair, Dylan Kimmel (<a href="mailto:dkimmel@neintegration.com">dkimmel@neintegration.com</a>), or the Social Chair, Alison Magill, before booking. While the website is down, reservations are made by email to the House Chair rather than through the online form.</div>
+<p>Club members may rent the Club for private functions on a first come, first served basis after October 15 and before May 1. No rentals are permitted from May 1 through October 15. Any member who rents the Club must be present at the event, and the payment check must be written by the member, not by someone they are sponsoring. Members must reserve the Club if they want exclusive use of the Clubhouse or plan to decorate it; an event that involves decorating and inviting people is a "party" under Board policy and is subject to the rental policy. The Club may not be used for commercial purposes.</p>
+<div class="note"><strong>Rental fee: $450 to reserve the Club for a private event.</strong> This includes a $150 refundable deposit, which is returned once the House Chair confirms the Club was left in the same condition it was found. Payment is by check written by the member. Questions about payment go to the House Chair, Dylan Kimmel (<a href="mailto:dkimmel@neintegration.com">dkimmel@neintegration.com</a>), or the Social Chair, Alison Magill. While the website is down, reservations are made by email to the House Chair rather than through the online form.</div>
 <h3>Clubhouse calendar, fall and winter 2026</h3>
 <p>The club will not have an online calendar until the new website launches. Dates already booked or scheduled are listed here and on the clubhouse bulletin board; check with the House Chair before requesting a date.</p>
 """ + events_table() + """
@@ -396,7 +396,7 @@ CLUBHOUSE = """
 <ol>
   <li>Check the calendar on the clubhouse wall for your date, then email the House Chair with your name, phone, requested date, start and end times, and expected number of guests.</li>
   <li>Sign the Release and Hold Harmless Agreement and agree to pay for any damage to the club.</li>
-  <li>Pay the rental fee and provide the deposit check. Once confirmed, your reservation is posted on the clubhouse calendar.</li>
+  <li>Pay the $450 rental fee by check. Your reservation is confirmed and posted on the clubhouse calendar once payment is received. The $150 deposit portion is refunded after the Club is confirmed to be in the same condition it was found.</li>
   <li>During the event, post a sign on the front door: "Private Member Event Underway". The club's beverage refrigerator is not available during rentals.</li>
   <li>To cancel, notify the House Chair immediately; payments are refunded and the date is released.</li>
 </ol>
