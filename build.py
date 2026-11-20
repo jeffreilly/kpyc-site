@@ -13,7 +13,6 @@ ROOT = Path(__file__).resolve().parent
 
 NAV = [
     ("index.html", "Home"),
-    ("election.html", "Ballot &amp; Bios"),
     ("membership.html", "Membership"),
     ("new-members.html", "New Members"),
     ("launch.html", "Launch"),
@@ -122,8 +121,6 @@ CSS = """
 
 # Upcoming clubhouse dates, fall and winter 2026. kind: "club" (named) or "rental" (shown as reserved).
 EVENTS = [
-    ("Sun Nov 8 or Mon Nov 9", "rental", "Reserved: Beth & Ron Gaffey"),
-    ("Sat Nov 14", "club", "Club event, details to be announced"),
     ("Sat Nov 21", "rental", "Reserved: Jackson Coyle"),
     ("Sun Nov 22", "rental", "Reserved: Jen Varney"),
     ("Thu Nov 26", "rental", "Reserved: Chris Snow, for Ryder"),
@@ -131,10 +128,12 @@ EVENTS = [
     ("Thu Dec 3", "rental", "Reserved: Janet Sylvester"),
     ("Sat Dec 5", "club", "NEI (Dylan Kimmel), private event"),
     ("Sat Dec 12", "club", "KPYC Christmas Party"),
+    ("Sun Dec 20", "rental", "Reserved: Silvia Yardino"),
     ("Fri Dec 25", "rental", "Reserved: Sarah & John Pendelton"),
     ("Sun Dec 27", "rental", "Reserved: Nancy & John Sakovitz"),
     ("Fri Jan 1", "club", "KPYC New Year's Day Bloody Mary Party"),
-    ("Sat Jan 16", "rental", "Reserved: Patricia Gardiner"),
+    ("Sun Jan 10", "rental", "Reserved: Harrison Behenko"),
+    ("Thu May 13", "rental", "Reserved: Janet Sylvester"),
 ]
 
 
@@ -264,7 +263,7 @@ MEMBERSHIP = """
 <h3>How do I rent the clubhouse for a private event?</h3>
 <p>See the <a href="clubhouse.html#rentals">Clubhouse Rentals</a> section. Rentals are for members only, in the off-season.</p>
 <h3>When are the membership meetings?</h3>
-<p>Two a year: one in October, when Directors are elected and trophies awarded, and one in January, when dues, the Share Value and any By-Law changes are set. This year's October meeting is Thursday, October 22, 2026.</p>
+<p>Two a year: one in October, when Directors are elected and trophies awarded, and one in January, when dues, the Share Value and any By-Law changes are set.</p>
 """
 
 NEW_MEMBERS = """
@@ -311,7 +310,7 @@ NEW_MEMBERS = """
 
 <h2 id="season">The club year</h2>
 <p><strong>Work days.</strong> In spring and fall we hold "Docks In" and "Docks Out" work days from 8:00 AM to noon, with coffee and lunch provided. All members are asked to help; it is a great way to meet people and it keeps dues reasonable. Docks Out 2026 is Saturday, October 17.</p>
-<p><strong>Membership meetings.</strong> Two a year: October (Director elections and trophies) and January (dues, Share Value, By-Law changes). One member per family Share is expected to attend. A quorum is required, so please plan to join us. The 2026 October meeting is Thursday, October 22.</p>
+<p><strong>Membership meetings.</strong> Two a year: October (Director elections and trophies) and January (dues, Share Value, By-Law changes). One member per family Share is expected to attend. A quorum is required, so please plan to join us.</p>
 <p><strong>Social functions.</strong> The Social Committee runs events through the season; see <a href="social-education.html">Social &amp; Education</a>. Members may always bring guests. There is no dress code.</p>
 <p><strong>Launch, docks and moorings.</strong> See the <a href="launch.html">Launch</a> and <a href="docks-moorings.html">Docks &amp; Moorings</a> pages.</p>
 <p><strong>Sailing School.</strong> The club operates the KPYC Sailing School for kids and adults; see <a href="sailing-school.html">Sailing School</a>.</p>
@@ -566,70 +565,8 @@ HOME_TILES = """
 """
 
 
-ELECTION = """
-<div class="info"><strong>Director election: Thursday, October 22, 2026, at 6 PM.</strong> Under Articles 11.D and 17.E of the By-Laws, any member who cannot attend the Annual Meeting may vote by absentee ballot. General proxies are not accepted. Ballots must be received by <strong>5 PM on 10/22</strong>.</div>
-<a class="btn" href="docs/KPYC_Absentee_Ballot_2026.pdf">Download the ballot (PDF)</a>
-<a class="btn secondary" href="docs/KPYC_Board_Candidate_Bios_2026.pdf">Download the bios (PDF)</a>
-
-<h2 id="ballot">Absentee ballot</h2>
-<p>Print the ballot and complete it by hand. Mark an X next to three nominees. You may write in nominees on the blank lines: print the full name of a member in good standing who has agreed to serve. Marks and write-ins together should total three, and a ballot with more than three selections cannot be counted. Print your name, sign, and date the ballot. A ballot missing a name, signature or date will not be counted. One ballot per member share. Signing a ballot for another member is grounds for disciplinary review under Article 14.C.</p>
-<p>Your name and selections are used only to check the voter list and prevent duplicate votes.</p>
-<p>If you cannot print a ballot, or have any questions, contact Mike Millikan, Treasurer, at <a href="mailto:treasurer@kpyc.net">treasurer@kpyc.net</a>. A copy will be provided.</p>
-<img class="ballot-img" src="assets/absentee_ballot_2026.png" alt="KPYC Board Election Ballot 2026 with instructions for submitting absentee ballots">
-<h3>How to submit (one of two ways)</h3>
-<p>Your ballot must be received by 5 PM on October 22.</p>
-<ol>
-  <li>Fold and tape the completed ballot, or place it in an envelope marked "ballot", and put it in the locked Treasurer Box on the wall in the club kitchen.</li>
-  <li>Scan or photograph the completed ballot and email it to <a href="mailto:treasurer@kpyc.net">treasurer@kpyc.net</a> with the subject line "ballot". The sending address must match the one the club has on file for the voting shareholder. Keep the original in case it is needed.</li>
-</ol>
-<p>If you vote by absentee ballot and then attend the meeting, your absentee ballot is the one counted and you will not be issued another.</p>
-
-<h2 id="bios">Candidate statements and biographies</h2>
-<p>Select a name to read the statement.</p>
-<details class="bio"><summary>Jeff Reilly, 2nd Term Nominee</summary>
-<p>My name is Jeff Reilly, and I am seeking a second term on the Kittery Point Yacht Club board. I bring a lifetime of boating experience and a deep commitment to the club community.</p>
-<p>I grew up in Traverse City, Michigan, where my summers were spent on Traverse Bay, the Straits of Mackinac, and Ontario's North Channel. Those early trips led to a family voyage from Traverse City to Georgetown, Bahamas, and back. After moving to New Hampshire, I earned a degree in Computer Information Systems and Business Administration at Plymouth State University and sailed with the university's Sailing Club, racing in collegiate events across New England. Today I can often be found on my Ranger Tug, exploring the waters around New Castle and Portsmouth with friends.</p>
-<p>As a sitting board member, I have led the evaluation and setup of ClubExpress as the club's new web platform and club management system, approved by the board on September 9. After the July website outage, I built and have maintained an interim site to keep KPYC reachable. The new platform is designed to be run by club volunteers: shared administrator access, a documented handover process, and committee chairs who control their own pages. A preview is planned for the next member meeting, with a target launch before the end of the year. A second term lets me carry the rollout through, including dues, event registration, and member records in one place. I also prepare the board meeting minutes and the monthly financial statement synopsis for board review.</p>
-<p>Beyond KPYC, I served on New Castle's Capital Improvement Committee, recommending short-term and long-term town spending. At the New Castle Congregational Church I started as technology lead, handling the website and email, and now also manage the church's Wi-Fi network and phone systems. There I also began as assistant treasurer and have been a member of the Audit committee for several years, where I both perform and lead the committee's work. I am a regular presence at club events and am always ready to lend a hand. I would be glad to continue serving the members of Kittery Point Yacht Club.</p>
-<p>Jeff</p>
-</details>
-<details class="bio"><summary>Jon Dickinson, 1st Term Nominee</summary>
-<p>I have been a member of KPYC since 2020. My wife Joanie, our son Drew, and our daughter Georgia moved to Portsmouth in 2007 and live on the Sagamore Creek. I grew up sailing on Lake Geneva, Wisconsin, alongside sailors who competed in the Olympics and the America’s Cup. I am the president and owner of Enliven Data Solutions, a company that provides publishers, media organizations, advertising agencies, and brands with advertising technology and data analytics services.</p>
-<p>KPYC is a remarkable community filled with kind, generous, and fun people. It has been a wonderful place to make new friends. Whether at cookouts, parties, football gatherings, cornhole on the deck, or cocktails at sunset, there is always a touch of magic.</p>
-<p>Over the past four years, I have attended most board meetings to better understand how the club operates. I appreciate the dedication of both the current and past board members and am eager to contribute my time and energy to continue their work in keeping KPYC a well-run, vibrant, and welcoming place.</p>
-<p>This winter I led the team to repaint the clubhouse. It was a great experience working with other members.</p>
-<p>A few things that I’d like to do with the board</p>
-<ul class="plain">
-<li>1. Member outreach to give the board a better understanding of what the members see as working / not working well and improvements.</li>
-<li>2. Develop a master plan for KPYC based on feedback from the members, board, and flag holders.</li>
-<li>3. Help improve communication with the members.</li>
-<li>4. Continue to do things that make the clubhouse a more enjoyable place.</li>
-</ul>
-<p>Thank you for your consideration. Jon</p>
-</details>
-<details class="bio"><summary>Maddie Parsons, 1st Term Nominee</summary>
-<p>Hi, for those of you who don’t know me, my name is Madeline Parsons, though I usually go by Maddie. My husband and I became members of Kittery Point Yacht Club in 2023. Although we are still relatively new members, we spent many years before joining attending KPYC events, racing on Tuesdays and Thursdays with PSA, and spending plenty of time on the Piscataqua in general.</p>
-<p>My background in yacht clubs comes largely from my time at Portsmouth Yacht Club, where I basically grew up professionally. I started as a dockhand, worked my way up to Dockmaster, and eventually became the club’s Steward and General Manager. During my time there, I was involved in everything from member relations and events to staffing, day-to-day operations, and the many small details that go into creating a club experience members are proud to be part of. That experience taught me a lot about membership, hospitality, community, and what makes a yacht club feel like more than just a place to keep a boat. In many ways, my time at Portsmouth Yacht Club was one of the biggest reasons I wanted to become a member at Kittery Point.</p>
-<p>Since then, my career has continued to center around hospitality, travel, sales, and working with people, but I’ve always appreciated the sense of community that comes with being part of a yacht club.</p>
-<p>I’m really excited about the future of Kittery Point Yacht Club and the opportunity to become more involved. I would love to bring my previous club experience, a fresh perspective, and a willingness to jump in wherever needed, while also learning from the members and leadership who know and love the club so well.</p>
-</details>
-<details class="bio"><summary>Todd Puterbaugh, 1st Term Nominee</summary>
-<p>Hello. I’m Todd Puterbaugh and I am running for the board this year.</p>
-<p>Some biographical info: I and my wife Honey have been members since 2019. In recent years, I have been active with the Sustainability Committee and the Social Committee. Honey and I are also active sailors, day-sailing and coastal cruising on our C&amp;C 30 sailboat Catherine. I have also crewed on a few PSA race boats.</p>
-<p>I am seeking a position on the board to further my contributions to the club. This club has become a very important part of my life. The property and facilities are gorgeous. The opportunities to swap stories and knowledge with fellow sailors makes me a better sailor. And, most importantly, the memories and friendships formed here will last a lifetime.</p>
-<p>Over the years, I have been a member and have held leadership positions in several non-profit member-run organizations. It has given me good experience on what makes these organizations successful and what causes issues. Two of the most crucial factors, which are related, are member involvement and sustainability/succession planning.</p>
-<p>Member-run organizations like this one are most vibrant and successful when each member thinks and acts not just as a “user” but also as a part-owner, which is, of course, literally the case for this club.</p>
-<p>Closely related to being active owner/members, is understanding what ownership entails. Knowledge and documentation of critical items such as the functioning, maintenance, and security of the physical property, member recruitment, and finances need to be continuously updated, widely known, and easily available to all members. I have seen organizations where the critical knowledge ends up being known to only a few key members. And if the club loses those key members, the tribal knowledge is lost and critical functions can suffer.</p>
-<p>If elected to the board, I will focus on these two fundamental areas. I will work to continue and expand the club’s strong tradition and sense of active membership/ownership. I will work to ensure that knowledge of how the club operates continues to be well-documented and easily accessed so that all members have the ability to more easily step into critical roles and contribute to these club operations.</p>
-</details>
-
-<script>(function(){var d=[],o=[];window.addEventListener('beforeprint',function(){d=[].slice.call(document.querySelectorAll('details.bio'));o=d.map(function(x){return x.open;});d.forEach(function(x){x.open=true;});});window.addEventListener('afterprint',function(){d.forEach(function(x,i){x.open=o[i];});});})();</script>
-"""
-
 
 def build_pages():
-    page("election.html", "2026 Board Election", "Absentee ballot and candidate bios", ELECTION,
-         [("ballot", "Absentee ballot"), ("bios", "Candidate bios")])
     page("membership.html", "Membership", "How to join the Kittery Point Yacht Club", MEMBERSHIP,
          [("join", "How to join"), ("dues", "Dues and Share"), ("application", "Application"), ("faq", "FAQ")])
     page("new-members.html", "New Member Reference Guide", "Finding your way around the club", NEW_MEMBERS,
